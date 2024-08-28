@@ -1,0 +1,30 @@
+.main {
+  .firstGrid {
+    margin-top: 10px;
+    flex-direction: row;
+    .button1 {
+      color: red;
+    }
+    .button2 {
+      color: gray;
+    }
+  }
+  .secondGrid {
+    .logo {
+      color: red;
+    }
+  }
+  .thirdGrid {
+    .searchIcon {
+      color: gray;
+    }
+    .searchBar {
+      color: gray;
+      border: 1px solid;
+      border-radius: 50px;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
