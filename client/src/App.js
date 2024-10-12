@@ -1,12 +1,26 @@
-import logo from "./logo.svg";
 import "./App.css";
-import MainScreen from "./MainScreen/MainScreen";
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainScreen from "./pages/MainScreen/MainScreen";
+import Booking from "./pages/Booking/Booking";
+import Movie from "./pages/MovieSchedule/Movie";
+import News from "./pages/News/News";
+import Social from "./pages/Social/Social";
+import Theater from "./pages/Theater/Theater";
 function App() {
   return (
-    <div className="App">
-      <MainScreen />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<MainScreen />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/movie" element={<Movie />} />
+          <Route path="/theater" element={<Theater />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/social" element={<Social />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

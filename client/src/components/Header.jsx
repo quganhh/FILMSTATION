@@ -4,7 +4,7 @@ import styles from "./styles/Header.module.scss";
 import Grid from "@mui/material/Grid";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { Link } from "react-router-dom";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -50,11 +50,21 @@ function Header() {
       <Toolbar>
         <Grid container spacing={2} className={styles.firstGrid}>
           <Grid xs={7} md={7} lg={7}>
-            <Button className={styles.button1}>Đặt vé xem phim</Button>
-            <Button className={styles.button2}>Lịch chiếu phim</Button>
-            <Button className={styles.button2}>Rạp</Button>
-            <Button className={styles.button2}>Tin Tức</Button>
-            <Button className={styles.button2}>Cộng đồng</Button>
+            <Link to="booking">
+              <Button className={styles.button1}>Đặt vé xem phim</Button>
+            </Link>
+            <Link to="movie">
+              <Button className={styles.button2}>Lịch chiếu phim</Button>
+            </Link>
+            <Link to="theater">
+              <Button className={styles.button2}>Rạp</Button>
+            </Link>
+            <Link to="news">
+              <Button className={styles.button2}>Tin Tức</Button>
+            </Link>
+            <Link to="social">
+              <Button className={styles.button2}>Cộng đồng</Button>
+            </Link>
           </Grid>
           <Grid xs={2} md={2} lg={2} className={styles.secondGrid}>
             <Typography variant="h6" className={styles.logo}>
