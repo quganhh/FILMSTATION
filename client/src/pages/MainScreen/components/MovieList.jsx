@@ -4,6 +4,7 @@ import {
   Grid,
   Card,
   CardContent,
+  CardMedia,
   Typography,
   Box,
 } from "@mui/material";
@@ -20,8 +21,17 @@ function MovieList() {
   const classes = useStyles();
   // Dummy movie data
   const movies = [
-    { title: "Movie 1", description: "Description for movie 1" },
-    { title: "Movie 2", description: "Description for movie 2" },
+    { title: "Quỷ Nhập Tràng", description: "Description for movie 1" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
+    { title: "The Flash", description: "Description for movie 2" },
     // Add more movies as needed
   ];
 
@@ -42,6 +52,11 @@ function MovieList() {
               </Card>
             </Grid>
           ))}
+          <Grid item xs={12} sm={12} md={12}>
+            <Box>
+              <CardMedia component="img" height="700" src="/news.png" />
+            </Box>
+          </Grid>
         </Grid>
       </Box>
     </Container>
