@@ -4,7 +4,6 @@ import {
   Grid,
   Card,
   CardContent,
-  CardMedia,
   Typography,
   Box,
 } from "@mui/material";
@@ -38,9 +37,9 @@ function MovieList() {
   return (
     <Container>
       <Box className={styles.main}>
-        <Typography variant="h5" gutterBottom>
+        {/* <Typography variant="h5" gutterBottom>
           Sắp chiếu
-        </Typography>
+        </Typography> */}
         <Grid container spacing={2}>
           {movies.map((movie, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -52,11 +51,6 @@ function MovieList() {
               </Card>
             </Grid>
           ))}
-          <Grid item xs={12} sm={12} md={12}>
-            <Box>
-              <CardMedia component="img" height="700" src="/news.png" />
-            </Box>
-          </Grid>
         </Grid>
       </Box>
     </Container>
