@@ -7,6 +7,7 @@ import Movie from "./pages/MovieSchedule/Movie";
 import News from "./pages/News/News";
 import Social from "./pages/Social/Social";
 import Theater from "./pages/Theater/Theater";
+import Register from "./pages/Register/Register";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/theater" element={<Theater />} />
           <Route path="/news" element={<News />} />
           <Route path="/social" element={<Social />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>
