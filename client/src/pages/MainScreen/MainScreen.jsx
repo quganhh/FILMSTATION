@@ -11,7 +11,7 @@ function MainScreen() {
       <Header />
       <Box className={styles.main}>
         <Typography className={styles.typo1} variant="h5" gutterBottom>
-          Sắp chiếu
+          Đang chiếu
         </Typography>
         <MovieList />
         <Box>
