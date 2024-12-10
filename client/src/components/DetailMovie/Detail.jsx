@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Typography, Box, CardMedia } from '@mui/material';
-import Header from '../Header';
 import styles from './styles/DetailMovie.module.scss'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';

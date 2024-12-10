@@ -1,3 +1,43 @@
 .container{
-    margin-top: 6em;
+    margin-top: 8%;
+}
+
+.filterCity{
+    width: 300px;
+}
+
+.filterFormat{
+    width: 300px;
+    margin-left: 3%;
+}
+
+.date_selector{
+    width: 40em;
+    background-color: #edf2f9;
+    border-radius: 8px;
+    margin-left: 27%;
+    margin-top: 2em;
+    justify-content: space-around;
+}
+
+.dateBTN{
+    color: #95aac9;
+    width: 7em;
+}
+
+.cinemaList{
+    margin-top: 2em;
+    margin-bottom: 8em;
+    background-color: #edf2f9;
+    width: 40em;
+    margin-left: 27%;
+    border-radius: 8px;
+}
+
+.cinemaList_item:hover{
+    background-color: #95aac9;
+}
+
+.cinemaList_branches{
+    background-color: #fff;
 }
