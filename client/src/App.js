@@ -8,6 +8,8 @@ import News from "./pages/News/News";
 import Social from "./pages/Social/Social";
 import Theater from "./pages/Theater/Theater";
 import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import DetailMovie from "./pages/DetailMovie/DetailMovie";
 function App() {
   return (
     <Router>
@@ -20,6 +22,8 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/social" element={<Social />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/detailmovie" element={<DetailMovie />} />
         </Routes>
       </div>
     </Router>
