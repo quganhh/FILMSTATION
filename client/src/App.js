@@ -10,6 +10,7 @@ import Theater from "./pages/Theater/Theater";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import DetailMovie from "./pages/DetailMovie/DetailMovie";
+import Movies from "./pages/Movies/Movies";
 function App() {
   return (
     <Router>
@@ -24,6 +25,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/detailmovie" element={<DetailMovie />} />
+]
+          <Route path="/movies" element={<Movies />} />
+]
         </Routes>
       </div>
     </Router>

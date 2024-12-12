@@ -1,0 +1,110 @@
+// MovieList.scss
+.container {
+
+    .img{
+        width: 100%;
+        height: 160px;
+        position: absolute;
+    }
+    
+  
+    .pageTitle {
+      margin-bottom: 20px;
+      margin-top: 40px;
+      margin-left: 25em;
+      color: #fff;
+      position: absolute;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .desTitle{
+      margin-bottom: 20px;
+      margin-top: 75px;
+      margin-left: 15em;
+      color: #fff;
+      position: absolute;
+      font-size: 16px;
+
+    }
+  
+    .filterBTN {
+      justify-content: center;
+      margin-bottom: 20px;
+    
+  
+      button {
+        margin: 0 10px;
+        color: black;
+        background-color: #fff;
+        width: 200px;
+        margin-top: 220px;
+        margin-bottom: 20px;
+      }
+
+    
+    }
+  
+    .moviesGrid {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 50px;
+        
+      .movieCard {
+        width: 200px; // Giảm kích thước thẻ
+        border-radius: 8px; // Bo góc
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+  
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        img {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            height: 280px; // Điều chỉnh chiều cao ảnh
+            object-fit: cover;
+          }
+
+        .MuiCardContent-root {
+            padding: 8px; // Thu gọn nội dung
+            text-align: center;
+        } 
+        
+        h6 {
+            font-size: 18px; // Giảm kích thước chữ
+            font-weight: bold;
+            margin-bottom: 4px;
+          }
+
+        .MuiTypography-body2 {
+            font-size: 12px; // Giảm kích thước thông tin phụ
+          }
+
+        .info{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .date{
+            font-size: 16px;
+        }
+  
+        .rating {
+            font-size: 16px;
+
+          &.positive {
+            color: green;
+          }
+  
+          &.negative {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+  

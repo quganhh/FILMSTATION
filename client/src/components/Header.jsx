@@ -53,7 +53,7 @@ function Header() {
             <Link to="booking">
               <Button className={styles.button1}>Đặt vé xem phim</Button>
             </Link>
-            <Link to="movie">
+            <Link to="movies">
               <Button className={styles.button2}>Lịch chiếu phim</Button>
             </Link>
             <Link to="theater">
