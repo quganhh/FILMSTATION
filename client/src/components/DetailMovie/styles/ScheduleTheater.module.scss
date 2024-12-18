@@ -1,184 +1,173 @@
-
 .container {
-    font-family: Arial, sans-serif;
-    border-radius: 5px;
-    padding: 16px;
-    margin-top: 70px;
-    width: 42em;
-    margin-left: 20em;
+  font-family: Arial, sans-serif;
+  border-radius: 5px;
+  padding: 16px;
+  margin-top: 70px;
+  width: 42em;
+  margin-left: 20em;
 
-    .filterContainer {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin: 1rem 0;
-      
-        .filterItem {
-          width: 200px;
-        }
-      }
-      
-      .dateSelector {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1rem;
+  .filterContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
 
-      
-        .dateItem {
-          text-align: center;
-          cursor: pointer;
-          padding: 0.5rem 1rem;
-          margin: 0 0.5rem;
-          border-radius: 5px;
-          transition: background-color 0.3s ease;
-      
-          &:hover {
-            background-color: #e0e0e0;
-          }
-      
-          &.activeDate {
-            background-color: #95aac9;
-            color: black;
-          }
-        }
-      
-        .dateDay {
-          font-weight: bold;
-        }
-      
-        .dateLabel {
-          font-size: 0.8rem;
-          color: #666;
-        }
-      }
-      
+    .filterItem {
+      width: 200px;
+    }
+  }
 
-    .cinemaGroup {
-      background-color: #ffffff;
+  .dateSelector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    .dateItem {
+      text-align: center;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
       border-radius: 5px;
-      margin-bottom: 12px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    &:hover{
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
 
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &.activeDate {
+        background-color: #95aac9;
+        color: black;
+      }
     }
 
-    
-      
-  
-      .cinemaHeader {
+    .dateDay {
+      font-weight: bold;
+    }
+
+    .dateLabel {
+      font-size: 0.8rem;
+      color: #666;
+    }
+  }
+
+  .cinemaGroup {
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cinemaHeader {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+
+      .cinemaLogo {
+        width: 30px;
+        margin-right: 8px;
+        border-radius: 20px;
+      }
+
+      .cinemaTitle {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    .branch {
+      .branchHeader {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 10px 16px;
-  
-        .cinemaLogo {
-          width: 30px;
-          margin-right: 8px;
-          border-radius: 20px;
+        cursor: pointer;
+        background-color: #f5f5f5;
+
+        &:hover {
+          background-color: #eaeaea;
         }
-  
-        .cinemaTitle {
-          font-size: 1rem;
+
+        .branchName {
+          font-size: 0.95rem;
           font-weight: bold;
         }
       }
-  
-      .branch {
-        .branchHeader {
+
+      .showTimes {
+        padding: 10px 16px;
+        border-top: 1px solid #ddd;
+
+        .branchAddress {
+          font-size: 0.85rem;
+          color: #666;
+          margin-bottom: 10px;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px 16px;
-          cursor: pointer;
-          background-color: #f5f5f5;
-  
-          &:hover {
-            background-color: #eaeaea;
-          }
-  
-          .branchName {
-            font-size: 0.95rem;
-            font-weight: bold;
-          }
-  
-          
         }
-  
-        .showTimes {
-          padding: 10px 16px;
-          border-top: 1px solid #ddd;
-  
-          .branchAddress {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 10px;
-            display: flex;
-          }
-  
-          .showButtons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-  
-            .timeButton {
-              background-color: #fff;
-              border: 1px solid #ccc;
-              border-radius: 5px;
-              padding: 6px 12px;
-              font-size: 0.9rem;
-              color: #333;
-  
-              &:hover {
-                background-color: #e0e0e0;
-              }
+
+        .showButtons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          .timeButton {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            color: #333;
+
+            &:hover {
+              background-color: #e0e0e0;
             }
           }
         }
       }
     }
   }
-  
-=======
-.container{
-    margin-top: 8%;
+}
+.container {
+  margin-top: 8%;
 }
 
-.filterCity{
-    width: 300px;
+.filterCity {
+  width: 300px;
 }
 
-.filterFormat{
-    width: 300px;
-    margin-left: 3%;
+.filterFormat {
+  width: 300px;
+  margin-left: 3%;
 }
 
-.date_selector{
-    width: 40em;
-    background-color: #edf2f9;
-    border-radius: 8px;
-    margin-left: 27%;
-    margin-top: 2em;
-    justify-content: space-around;
+.date_selector {
+  width: 40em;
+  background-color: #edf2f9;
+  border-radius: 8px;
+  margin-left: 27%;
+  margin-top: 2em;
+  justify-content: space-around;
 }
 
-.dateBTN{
-    color: #95aac9;
-    width: 7em;
+.dateBTN {
+  color: #95aac9;
+  width: 7em;
 }
 
-.cinemaList{
-    margin-top: 2em;
-    margin-bottom: 8em;
-    background-color: #edf2f9;
-    width: 40em;
-    margin-left: 27%;
-    border-radius: 8px;
+.cinemaList {
+  margin-top: 2em;
+  margin-bottom: 8em;
+  background-color: #edf2f9;
+  width: 40em;
+  margin-left: 27%;
+  border-radius: 8px;
 }
 
-.cinemaList_item:hover{
-    background-color: #95aac9;
+.cinemaList_item:hover {
+  background-color: #95aac9;
 }
 
-.cinemaList_branches{
-    background-color: #fff;
+.cinemaList_branches {
+  background-color: #fff;
 }
