@@ -61,10 +61,14 @@ function Header() {
               <Button className={styles.button1}>Đặt vé xem phim</Button>
             </Link>
             <Link to="movies">
+
+              <Button className={styles.button2}>Lịch chiếu phim</Button>
+
               <Button className={styles.button2}>Lịch chiếu</Button>
             </Link>
             <Link to="movies">
               <Button className={styles.button2}>Phim</Button>
+
             </Link>
             <Link to="theater">
               <Button className={styles.button2}>Rạp</Button>

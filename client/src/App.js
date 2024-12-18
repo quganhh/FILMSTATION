@@ -29,9 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/detailmovie" element={<DetailMovie />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/seat" element={<SeatMain />} />
-          <Route path="/order" element={<OrderMain />} />
+          <Route path="/movies" element={<Movies />} />
         </Routes>
       </div>
     </Router>
