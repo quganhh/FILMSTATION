@@ -1,21 +1,33 @@
-
-import React, { useState } from 'react';
-import { Box, Typography, Button, RadioGroup, FormControlLabel, Radio, TextField, Checkbox } from '@mui/material';
-import styles from './Payment.module.scss';
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  TextField,
+  Checkbox,
+} from "@mui/material";
+import styles from "./Payment.module.scss";
 
 // Danh sách các phương thức thanh toán với hình ảnh
 const paymentMethods = [
-  { value: 'momo', label: 'Ví MoMo', image: '/momo.png' },
-  { value: 'qr', label: 'Quét mã QR', image: '/QuetQR.png' },
-  { value: 'bank', label: 'Chuyển khoản / Internet Banking', image: '/bank.png' },
-  { value: 'shopee', label: 'Ví ShopeePay', image: '/shopeepay.png' },
-  { value: 'visa', label: 'Thẻ Visa, Master, JCB', image: '/visa.png' },
-  { value: 'atm', label: 'Thẻ ATM (Thẻ nội địa)', image: '/atm.png' },
-  { value: 'fpt', label: 'Ví FPT Pay', image: '/fptpay.png' },
-  { value: 'moveek', label: 'Moveek Credits', image: '/moveek.png' },
+  { value: "momo", label: "Ví MoMo", image: "/momo.png" },
+  { value: "qr", label: "Quét mã QR", image: "/QuetQR.png" },
+  {
+    value: "bank",
+    label: "Chuyển khoản / Internet Banking",
+    image: "/bank.png",
+  },
+  { value: "shopee", label: "Ví ShopeePay", image: "/shopeepay.png" },
+  { value: "visa", label: "Thẻ Visa, Master, JCB", image: "/visa.png" },
+  { value: "atm", label: "Thẻ ATM (Thẻ nội địa)", image: "/atm.png" },
+  { value: "fpt", label: "Ví FPT Pay", image: "/fptpay.png" },
+  { value: "moveek", label: "Moveek Credits", image: "/moveek.png" },
 ];
 
-const Payment = () => {
+function Payment() {
   const [isCreateAccount, setIsCreateAccount] = useState(false);
 
   return (
@@ -48,7 +60,9 @@ const Payment = () => {
 
         {/* Hình thức thanh toán */}
         <Box className={styles.paymentMethods}>
-          <Typography className={styles.paymentTitle}>Hình thức thanh toán</Typography>
+          <Typography className={styles.paymentTitle}>
+            Hình thức thanh toán
+          </Typography>
           <RadioGroup defaultValue="momo" className={styles.methodList}>
             {paymentMethods.map((method) => (
               <FormControlLabel
@@ -56,7 +70,13 @@ const Payment = () => {
                 value={method.value}
                 control={
                   <Radio
-                    checkedIcon={<img src="/checkIcon.png" alt="checked" className={styles.icon} />}
+                    checkedIcon={
+                      <img
+                        src="/checkIcon.png"
+                        alt="checked"
+                        className={styles.icon}
+                      />
+                    }
                   />
                 }
                 label={
@@ -109,45 +129,25 @@ const Payment = () => {
       <Box className={styles.rightSection}>
         <Box className={styles.totalBox}>
           <Typography className={styles.totalPrice}>63,000 đ</Typography>
-          <Typography className={styles.timer}>Thời gian giữ ghế: 04:17</Typography>
+          <Typography className={styles.timer}>
+            Thời gian giữ ghế: 04:17
+          </Typography>
         </Box>
 
         <Typography className={styles.note}>
-          Vé đã mua không thể đổi hoặc hoàn tiền. Mã vé sẽ được gửi qua số điện thoại và email đã nhập. Vui lòng kiểm tra lại thông tin trước khi tiếp tục.
+          Vé đã mua không thể đổi hoặc hoàn tiền. Mã vé sẽ được gửi qua số điện
+          thoại và email đã nhập. Vui lòng kiểm tra lại thông tin trước khi tiếp
+          tục.
         </Typography>
 
-        <Button variant="contained" color="primary" className={styles.paymentButton}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={styles.paymentButton}
+        >
           Thanh toán
         </Button>
       </Box>
-    </Box>
-  );
-};
-
-import React from "react";
-// import Seat from "./Seat/components/Seat";
-// import Order from "./Order/OrderMain";
-// import Pay from "./components/Pay";
-// import Ticket from "./components/TicketCheck";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import {
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Button,
-  Menu,
-  MenuItem,
-  Box,
-} from "@mui/material";
-function Payment() {
-  return (
-    <Box>
-      <Header />
-
-      <Footer />
     </Box>
   );
 }

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, Select, MenuItem, TextField } from "@mui/material";
-
 import styles from "./styles/ScheduleTheater.module.scss";
 import {
   Box,
@@ -19,86 +17,81 @@ import {
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styles from "./styles/ScheduleTheater.module.scss";
 import { Link } from "react-router-dom";
-const cinemaData = [
-  {
-    name: "Beta Cinemas",
-    logo: "Beta.png",
-    branches: [
-      {
-        name: "Beta Trần Quang Khải",
-        address:
-          "Tầng 2 & 3, Tòa nhà IMC, 62 Đường Trần Quang Khải, Quận 1, TP. Hồ Chí Minh",
-        shows: ["13:00", "15:00", "21:30", "23:15"],
-      },
-      {
-        name: "Beta Quang Trung",
-        address:
-          "Tầng 2 & 3, Tòa nhà IMC, 62 Đường Trần Quang Khải, Quận 1, TP. Hồ Chí Minh",
-        shows: ["14:00", "18:00", "20:30"],
-      },
-    ],
-  },
-  {
-    name: "Mega GS",
-    logo: "megaGS.png",
-    branches: [
-      {
-        name: "Mega GS Cao Thắng",
-        address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
-        shows: ["11:00", "13:30", "19:45"],
-      },
-    ],
-  },
-  {
-    name: "CGV Cinemas",
-    logo: "cgv.jpg",
-    branches: [
-      {
-        name: "CGV Lý Chính Thắng",
-        address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
-        shows: ["11:00", "13:30", "19:45"],
-      },
-    ],
-  },
-  {
-    name: "Galaxy Cinemas",
-    logo: "galaxy.png",
-    branches: [
-      {
-        name: "Galaxy Nguyễn Du",
-        address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
-        shows: ["11:00", "13:30", "19:45"],
-      },
-    ],
-  },
-  {
-    name: "BHD Star",
-    logo: "BHD.png",
-    branches: [
-      {
-        name: "BHD Quang Trung",
-        address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
-        shows: ["11:00", "13:30", "19:45"],
-      },
-    ],
-  },
-];
-
-const dates = [
-  { day: "18/12", label: "Th 4" },
-  { day: "19/12", label: "Th 5" },
-  { day: "20/12", label: "Th 6" },
-  { day: "21/12", label: "Th 7" },
-  { day: "22/12", label: "CN" },
-  { day: "23/12", label: "Th 2" },
-];
-
-const ScheduleTheater = () => {
-];
 
 function ScheduleTheater() {
+  const cinemaData = [
+    {
+      name: "Beta Cinemas",
+      logo: "Beta.png",
+      branches: [
+        {
+          name: "Beta Trần Quang Khải",
+          address:
+            "Tầng 2 & 3, Tòa nhà IMC, 62 Đường Trần Quang Khải, Quận 1, TP. Hồ Chí Minh",
+          shows: ["13:00", "15:00", "21:30", "23:15"],
+        },
+        {
+          name: "Beta Quang Trung",
+          address:
+            "Tầng 2 & 3, Tòa nhà IMC, 62 Đường Trần Quang Khải, Quận 1, TP. Hồ Chí Minh",
+          shows: ["14:00", "18:00", "20:30"],
+        },
+      ],
+    },
+    {
+      name: "Mega GS",
+      logo: "megaGS.png",
+      branches: [
+        {
+          name: "Mega GS Cao Thắng",
+          address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
+          shows: ["11:00", "13:30", "19:45"],
+        },
+      ],
+    },
+    {
+      name: "CGV Cinemas",
+      logo: "cgv.jpg",
+      branches: [
+        {
+          name: "CGV Lý Chính Thắng",
+          address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
+          shows: ["11:00", "13:30", "19:45"],
+        },
+      ],
+    },
+    {
+      name: "Galaxy Cinemas",
+      logo: "galaxy.png",
+      branches: [
+        {
+          name: "Galaxy Nguyễn Du",
+          address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
+          shows: ["11:00", "13:30", "19:45"],
+        },
+      ],
+    },
+    {
+      name: "BHD Star",
+      logo: "BHD.png",
+      branches: [
+        {
+          name: "BHD Quang Trung",
+          address: "123 Cao Thắng, Quận 3, TP. Hồ Chí Minh",
+          shows: ["11:00", "13:30", "19:45"],
+        },
+      ],
+    },
+  ];
+  const dates = [
+    { day: "18/12", label: "Th 4" },
+    { day: "19/12", label: "Th 5" },
+    { day: "20/12", label: "Th 6" },
+    { day: "21/12", label: "Th 7" },
+    { day: "22/12", label: "CN" },
+    { day: "23/12", label: "Th 2" },
+  ];
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -114,28 +107,9 @@ function ScheduleTheater() {
   // Toggle cụm rạp
   const toggleCinema = (cinemaIndex) => {
     setOpenCinemaIndex(openCinemaIndex === cinemaIndex ? null : cinemaIndex);
-    setOpenBranchIndex(null); 
-    
-  };
-
-  // Toggle chi nhánh
-  const toggleBranch = (branchIndex) => {
-    setOpenBranchIndex(openBranchIndex === branchIndex ? null : branchIndex);
-  };
-
-  // Toggle cụm rạp
-  const toggleCinema = (cinemaIndex) => {
-    setOpenCinemaIndex(openCinemaIndex === cinemaIndex ? null : cinemaIndex);
     setOpenBranchIndex(null);
   };
-  const dates = [
-    { day: "18/12", label: "Th 4" },
-    { day: "19/12", label: "Th 5" },
-    { day: "20/12", label: "Th 6" },
-    { day: "21/12", label: "Th 7" },
-    { day: "22/12", label: "CN" },
-    { day: "23/12", label: "Th 2" },
-  ];
+
   // Toggle chi nhánh
   const toggleBranch = (branchIndex) => {
     setOpenBranchIndex(openBranchIndex === branchIndex ? null : branchIndex);
@@ -144,7 +118,6 @@ function ScheduleTheater() {
     <Box className={styles.container}>
       <Box className={styles.filterContainer}>
         <TextField
-          select 
           select
           value={selectedCity}
           onChange={(e) => setSelectedCity(e.target.value)}
@@ -194,7 +167,9 @@ function ScheduleTheater() {
             onClick={() => toggleCinema(cinemaIndex)}
           >
             <img src={cinema.logo} alt="logo" className={styles.cinemaLogo} />
-            <Typography className={styles.cinemaTitle}>{cinema.name}</Typography>
+            <Typography className={styles.cinemaTitle}>
+              {cinema.name}
+            </Typography>
 
             <Typography className={styles.cinemaTitle}>
               {cinema.name}
@@ -211,28 +186,7 @@ function ScheduleTheater() {
                 >
                   <Typography className={styles.branchName}>
                     {branch.name}
-                  </Typography>  
-                </Box>
-
-                {/* Suất chiếu */}
-                {openBranchIndex === branchIndex && (
-                  <Box className={styles.showTimes}>
-                    <Typography className={styles.branchAddress}>
-                      {branch.address}
-                    </Typography>
-                    <Box className={styles.showButtons}>
-                      {branch.shows.map((time, timeIndex) => (
-                        <Button
-                          key={timeIndex}
-                          className={styles.timeButton}
-                          variant="outlined"
-                        >
-                          {time} 
-                        </Button>
-                      ))}
-                    </Box>
-                  </Box>
-                )}
+                  </Typography>
                 </Box>
 
                 {/* Suất chiếu */}
