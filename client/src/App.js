@@ -11,6 +11,9 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import DetailMovie from "./pages/DetailMovie/DetailMovie";
 import Movies from "./pages/Movies/Movies";
+import Payment from "./pages/Payment/Payment";
+import SeatMain from "./pages/Payment/Seat/SeatMain";
+import OrderMain from "./pages/Payment/Order/OrderMain";
 function App() {
   return (
     <Router>
@@ -26,7 +29,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/detailmovie" element={<DetailMovie />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/seat" element={<SeatMain />} />
+          <Route path="/order" element={<OrderMain />} />
         </Routes>
       </div>
     </Router>

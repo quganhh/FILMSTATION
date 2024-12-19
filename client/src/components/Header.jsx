@@ -1,5 +1,12 @@
 import React from "react";
-import { AppBar, Typography, Button, Toolbar, InputBase } from "@mui/material";
+import {
+  AppBar,
+  Typography,
+  Button,
+  Toolbar,
+  InputBase,
+  Box,
+} from "@mui/material";
 import styles from "./styles/Header.module.scss";
 import Grid from "@mui/material/Grid";
 import { styled, alpha } from "@mui/material/styles";
@@ -74,9 +81,11 @@ function Header() {
             </Link>
           </Grid>
           <Grid xs={2} md={2} lg={2} className={styles.secondGrid}>
-            <Typography variant="h6" className={styles.logo}>
-              Film Station
-            </Typography>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Typography variant="h6" className={styles.logo}>
+                Film Station
+              </Typography>
+            </Link>
           </Grid>
         </Grid>
         <Grid xs={3} md={3} lg={3} className={styles.thirdGrid}>

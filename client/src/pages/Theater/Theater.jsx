@@ -1,10 +1,16 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import TheaterShowtimes from "./components/TheaterShowtimes";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
 function Theater() {
   return (
-    <Box>
-      <Typography>Theater</Typography>
-    </Box>
+    <div>
+      <Header />
+      <TheaterShowtimes />
+      <Footer />
+    </div>
   );
 }
+
 export default Theater;
