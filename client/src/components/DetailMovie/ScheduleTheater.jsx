@@ -2,7 +2,25 @@ import React, { useState } from "react";
 import { Box, Typography, Button, Select, MenuItem, TextField } from "@mui/material";
 
 import styles from "./styles/ScheduleTheater.module.scss";
-
+import {
+  Box,
+  Button,
+  MenuItem,
+  Collapse,
+  List,
+  ListItemIcon,
+  ListItem,
+  ListItemText,
+  Avatar,
+  Select,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import styles from "./styles/ScheduleTheater.module.scss";
+import { Link } from "react-router-dom";
 const cinemaData = [
   {
     name: "Beta Cinemas",
@@ -78,6 +96,15 @@ const dates = [
 ];
 
 const ScheduleTheater = () => {
+];
+
+function ScheduleTheater() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const handleToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   const [openCinemaIndex, setOpenCinemaIndex] = useState(null);
   const [openBranchIndex, setOpenBranchIndex] = useState(null);
   const [selectedCity, setSelectedCity] = useState("Tp. Hồ Chí Minh");
@@ -96,11 +123,29 @@ const ScheduleTheater = () => {
     setOpenBranchIndex(openBranchIndex === branchIndex ? null : branchIndex);
   };
 
+  // Toggle cụm rạp
+  const toggleCinema = (cinemaIndex) => {
+    setOpenCinemaIndex(openCinemaIndex === cinemaIndex ? null : cinemaIndex);
+    setOpenBranchIndex(null);
+  };
+  const dates = [
+    { day: "18/12", label: "Th 4" },
+    { day: "19/12", label: "Th 5" },
+    { day: "20/12", label: "Th 6" },
+    { day: "21/12", label: "Th 7" },
+    { day: "22/12", label: "CN" },
+    { day: "23/12", label: "Th 2" },
+  ];
+  // Toggle chi nhánh
+  const toggleBranch = (branchIndex) => {
+    setOpenBranchIndex(openBranchIndex === branchIndex ? null : branchIndex);
+  };
   return (
     <Box className={styles.container}>
       <Box className={styles.filterContainer}>
         <TextField
           select 
+          select
           value={selectedCity}
           onChange={(e) => setSelectedCity(e.target.value)}
           variant="outlined"
@@ -127,7 +172,6 @@ const ScheduleTheater = () => {
         </TextField>
       </Box>
 
-
       <Box className={styles.dateSelector}>
         {dates.map((date, index) => (
           <Box
@@ -143,7 +187,6 @@ const ScheduleTheater = () => {
         ))}
       </Box>
 
-
       {cinemaData.map((cinema, cinemaIndex) => (
         <Box key={cinemaIndex} className={styles.cinemaGroup}>
           <Box
@@ -152,7 +195,10 @@ const ScheduleTheater = () => {
           >
             <img src={cinema.logo} alt="logo" className={styles.cinemaLogo} />
             <Typography className={styles.cinemaTitle}>{cinema.name}</Typography>
-   
+
+            <Typography className={styles.cinemaTitle}>
+              {cinema.name}
+            </Typography>
           </Box>
 
           {/* Danh sách chi nhánh */}
@@ -165,8 +211,7 @@ const ScheduleTheater = () => {
                 >
                   <Typography className={styles.branchName}>
                     {branch.name}
-                  </Typography>
-                  
+                  </Typography>  
                 </Box>
 
                 {/* Suất chiếu */}
@@ -188,12 +233,35 @@ const ScheduleTheater = () => {
                     </Box>
                   </Box>
                 )}
+                </Box>
+
+                {/* Suất chiếu */}
+                <Link to="/seat" style={{ textDecoration: "none" }}>
+                  {openBranchIndex === branchIndex && (
+                    <Box className={styles.showTimes}>
+                      <Typography className={styles.branchAddress}>
+                        {branch.address}
+                      </Typography>
+                      <Box className={styles.showButtons}>
+                        {branch.shows.map((time, timeIndex) => (
+                          <Button
+                            key={timeIndex}
+                            className={styles.timeButton}
+                            variant="outlined"
+                          >
+                            {time}
+                          </Button>
+                        ))}
+                      </Box>
+                    </Box>
+                  )}
+                </Link>
               </Box>
             ))}
         </Box>
       ))}
     </Box>
   );
-};
+}
 
 export default ScheduleTheater;
