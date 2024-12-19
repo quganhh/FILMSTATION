@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Box, Typography, Button, Select, MenuItem, TextField } from "@mui/material";
+
+import styles from "./styles/ScheduleTheater.module.scss";
 import {
   Box,
   Button,
@@ -18,7 +21,6 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./styles/ScheduleTheater.module.scss";
 import { Link } from "react-router-dom";
-
 const cinemaData = [
   {
     name: "Beta Cinemas",
@@ -84,6 +86,18 @@ const cinemaData = [
   },
 ];
 
+const dates = [
+  { day: "18/12", label: "Th 4" },
+  { day: "19/12", label: "Th 5" },
+  { day: "20/12", label: "Th 6" },
+  { day: "21/12", label: "Th 7" },
+  { day: "22/12", label: "CN" },
+  { day: "23/12", label: "Th 2" },
+];
+
+const ScheduleTheater = () => {
+];
+
 function ScheduleTheater() {
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -96,6 +110,18 @@ function ScheduleTheater() {
   const [selectedCity, setSelectedCity] = useState("Tp. Hồ Chí Minh");
   const [selectedFormat, setSelectedFormat] = useState("Định dạng");
   const [selectedDate, setSelectedDate] = useState(0);
+
+  // Toggle cụm rạp
+  const toggleCinema = (cinemaIndex) => {
+    setOpenCinemaIndex(openCinemaIndex === cinemaIndex ? null : cinemaIndex);
+    setOpenBranchIndex(null); 
+    
+  };
+
+  // Toggle chi nhánh
+  const toggleBranch = (branchIndex) => {
+    setOpenBranchIndex(openBranchIndex === branchIndex ? null : branchIndex);
+  };
 
   // Toggle cụm rạp
   const toggleCinema = (cinemaIndex) => {
@@ -118,6 +144,7 @@ function ScheduleTheater() {
     <Box className={styles.container}>
       <Box className={styles.filterContainer}>
         <TextField
+          select 
           select
           value={selectedCity}
           onChange={(e) => setSelectedCity(e.target.value)}
@@ -167,6 +194,8 @@ function ScheduleTheater() {
             onClick={() => toggleCinema(cinemaIndex)}
           >
             <img src={cinema.logo} alt="logo" className={styles.cinemaLogo} />
+            <Typography className={styles.cinemaTitle}>{cinema.name}</Typography>
+
             <Typography className={styles.cinemaTitle}>
               {cinema.name}
             </Typography>
@@ -182,7 +211,28 @@ function ScheduleTheater() {
                 >
                   <Typography className={styles.branchName}>
                     {branch.name}
-                  </Typography>
+                  </Typography>  
+                </Box>
+
+                {/* Suất chiếu */}
+                {openBranchIndex === branchIndex && (
+                  <Box className={styles.showTimes}>
+                    <Typography className={styles.branchAddress}>
+                      {branch.address}
+                    </Typography>
+                    <Box className={styles.showButtons}>
+                      {branch.shows.map((time, timeIndex) => (
+                        <Button
+                          key={timeIndex}
+                          className={styles.timeButton}
+                          variant="outlined"
+                        >
+                          {time} 
+                        </Button>
+                      ))}
+                    </Box>
+                  </Box>
+                )}
                 </Box>
 
                 {/* Suất chiếu */}

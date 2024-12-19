@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+
+import styles from './styles/MovieList.module.scss'
+
 import styles from "./styles/MovieList.module.scss";
 import { Link } from "react-router-dom";
+
 const movies = [
   {
     title: "Công Tử Bạc Liêu",
@@ -51,6 +55,7 @@ const movies = [
     rating: "30%",
     img: "chiendiatuthi.jpeg",
   },
+
 ];
 
 const MovieCard = () => {
@@ -83,6 +88,76 @@ const MovieCard = () => {
 
   return (
     <Box className={styles.Container}>
+
+
+      <Box
+        className="horizontal-scroll"
+        ref={scrollRef}
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          gap: 2,
+          paddingBottom: 1,
+          cursor: isDragging ? "grabbing" : "grab",
+          '::-webkit-scrollbar': { display: "none" },
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
+        {movies.map((movie, index) => (
+          <Card
+            className={styles.moviecard}
+            key={index}
+            sx={{
+              minWidth: 180,
+              scrollSnapAlign: "start",
+              transition: "transform 0.3s, box-shadow 0.3s",
+              '&:hover': {
+                transform: "scale(1.05)",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+              },
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="200"
+              image={movie.img}
+              alt={movie.title}
+              sx={{
+                objectFit: "cover",
+              }}
+            />
+            <CardContent className={styles.moviecontent}>
+              <Typography variant="subtitle1" className={styles.movietitle} noWrap>
+                {movie.title}
+              </Typography>
+              <Box className={styles.movieinfo}>
+                <Typography variant="body2" className={styles.moviedate}>
+                  {movie.date}
+                </Typography>
+               {movie.rating && (
+                  <Typography variant="body2" className={styles.movierating}>
+                    {movie.rating}
+                  </Typography>
+                )}
+              </Box>
+
+              <Box
+                variant="contained"
+                color="secondary"
+                className={styles.buyticket}
+                size="small"
+              >
+                Mua vé
+              </Box>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+
       <Link to="/detailmovie" style={{ textDecoration: "none" }}>
         <Box
           className="horizontal-scroll"
