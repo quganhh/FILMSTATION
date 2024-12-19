@@ -17,6 +17,7 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./styles/ScheduleTheater.module.scss";
+import { Link } from "react-router-dom";
 
 const cinemaData = [
   {
@@ -185,24 +186,26 @@ function ScheduleTheater() {
                 </Box>
 
                 {/* Suất chiếu */}
-                {openBranchIndex === branchIndex && (
-                  <Box className={styles.showTimes}>
-                    <Typography className={styles.branchAddress}>
-                      {branch.address}
-                    </Typography>
-                    <Box className={styles.showButtons}>
-                      {branch.shows.map((time, timeIndex) => (
-                        <Button
-                          key={timeIndex}
-                          className={styles.timeButton}
-                          variant="outlined"
-                        >
-                          {time}
-                        </Button>
-                      ))}
+                <Link to="/seat" style={{ textDecoration: "none" }}>
+                  {openBranchIndex === branchIndex && (
+                    <Box className={styles.showTimes}>
+                      <Typography className={styles.branchAddress}>
+                        {branch.address}
+                      </Typography>
+                      <Box className={styles.showButtons}>
+                        {branch.shows.map((time, timeIndex) => (
+                          <Button
+                            key={timeIndex}
+                            className={styles.timeButton}
+                            variant="outlined"
+                          >
+                            {time}
+                          </Button>
+                        ))}
+                      </Box>
                     </Box>
-                  </Box>
-                )}
+                  )}
+                </Link>
               </Box>
             ))}
         </Box>

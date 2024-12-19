@@ -83,7 +83,7 @@ const MovieCard = () => {
 
   return (
     <Box className={styles.Container}>
-      <Link to="/payment" style={{ textDecoration: "none" }}>
+      <Link to="/detailmovie" style={{ textDecoration: "none" }}>
         <Box
           className="horizontal-scroll"
           ref={scrollRef}
