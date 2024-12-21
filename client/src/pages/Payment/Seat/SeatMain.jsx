@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
 import SeatMap from "./components/SeatMap";
 import BookingSummary from "./components/BookingSummary";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 
 const BookingPage = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -15,20 +17,26 @@ const BookingPage = () => {
   };
 
   const totalPrice = selectedSeats.length * 100000; // Giá mỗi ghế: 100,000 đ
+  const totalVIPPrice = selectedSeats.length * 130000; // Giá mỗi ghế: 100,000 đ
 
   return (
-    <Box p={4}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <SeatMap onSeatSelect={handleSeatSelect} />
+    <Box>
+      <Header />
+      <Box p={4}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8}>
+            <SeatMap onSeatSelect={handleSeatSelect} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <BookingSummary
+              selectedSeats={selectedSeats}
+              totalPrice={totalPrice}
+              totalVIPPrice={totalVIPPrice}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <BookingSummary
-            selectedSeats={selectedSeats}
-            totalPrice={totalPrice}
-          />
-        </Grid>
-      </Grid>
+      </Box>
+      <Footer />
     </Box>
   );
 };
