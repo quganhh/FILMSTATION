@@ -2,6 +2,8 @@
   .firstGrid {
     margin-top: 10px;
     flex-direction: row;
+    align-items: center; 
+    display: flex;
     .button1 {
       color: red;
     }
@@ -10,22 +12,32 @@
     }
   }
   .secondGrid {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
     .logo {
       color: red;
       text-decoration: none;
     }
   }
   .thirdGrid {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
     .searchIcon {
       color: gray;
     }
     .searchBar {
       color: gray;
       border: 1px solid;
+      margin-right: 10px; 
       border-radius: 50px;
       &:hover {
         color: black;
       }
+    }
+    .profile {
+      margin-left: 10px; 
     }
   }
 }
