@@ -17,7 +17,7 @@ const BookingPage = () => {
   };
 
   const totalPrice = selectedSeats.length * 100000; // Giá mỗi ghế: 100,000 đ
-  const totalVIPPrice = selectedSeats.length * 130000; // Giá mỗi ghế: 100,000 đ
+  const totalVIPPrice = selectedSeats.length * 130000; // Giá mỗi ghế: 130,000 đ
 
   return (
     <Box>

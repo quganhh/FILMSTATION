@@ -71,7 +71,12 @@ function Header() {
   return (
     <AppBar position="static" className={styles.main} sx={{ bgcolor: "white" }}>
       <Toolbar>
-        <Grid container spacing={2} alignItems="center" justifyContent="space-between">
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Grid item xs={7} className={styles.firstGrid}>
             <Link to="/">
               <Button className={styles.button1}>Đặt vé xem phim</Button>
@@ -112,15 +117,17 @@ function Header() {
                   className={styles.searchBar}
                 />
               </Search>
-              <IconButton
-                size="large"
-                edge="end"
+              <Link to="/profile">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  onClick={handleMenu}
+                  className={styles.profile}
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
 
-                onClick={handleMenu}
-                className={styles.profile}
-              >
-                <AccountCircle />
-              </IconButton>
               <Menu
                 anchorEl={anchorEl}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
