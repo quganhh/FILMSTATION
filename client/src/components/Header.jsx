@@ -16,6 +16,8 @@ import Grid from "@mui/material/Grid";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,6 +70,14 @@ function Header() {
     setAnchorEl(null);
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      alert("Lỗi khi đăng xuất: " + error.message);
+    }
+  };
+
   return (
     <AppBar position="static" className={styles.main} sx={{ bgcolor: "white" }}>
       <Toolbar>
@@ -101,7 +111,7 @@ function Header() {
           <Grid item xs={2} className={styles.secondGrid}>
             <Link to="/" style={{ textDecoration: "none" }}>
               <Typography variant="h6" className={styles.logo}>
-                Film Station
+                FS
               </Typography>
             </Link>
           </Grid>
@@ -117,7 +127,11 @@ function Header() {
                   className={styles.searchBar}
                 />
               </Search>
-              <Link to="/profile">
+
+              <Link to="login">
+                  <Button>Login</Button>
+              </Link>
+   
                 <IconButton
                   size="large"
                   edge="end"
@@ -126,7 +140,7 @@ function Header() {
                 >
                   <AccountCircle />
                 </IconButton>
-              </Link>
+              
 
               <Menu
                 anchorEl={anchorEl}
@@ -136,10 +150,12 @@ function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
+                <Link to="profile">
+                  <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
+                </Link>
                 <MenuItem onClick={handleClose}>Quản lý tài khoản</MenuItem>
                 <MenuItem onClick={handleClose}>Lịch sử mua vé</MenuItem>
-                <MenuItem onClick={handleClose}>Đăng xuất</MenuItem>
+                <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
               </Menu>
             </Box>
           </Grid>
