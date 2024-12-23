@@ -1,8 +1,95 @@
-.container{
+.container {
   display: flex;
-  justify-content:space-around;
+  flex-direction: column;  
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 100px;
+  box-sizing: border-box;
 }
+
+.loginbox {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logintitle {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.inputgroup {
+  margin-bottom: 15px;
+  
+  .input-field {
+    & .MuiOutlinedInput-root {
+      border-radius: 5px;
+    }
+  }
+}
+
+.forgotpassword {
+  display: block;
+  text-align: right;
+  font-size: 0.875rem;
+  color: #0073e6;
+  margin-top: 8px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.loginbtn {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: #0073e6;
+  color: white;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: #005bb5;
+  }
+}
+
+.registerlink {
+  margin-top: 15px;
+  font-size: 0.875rem;
+  color: #666;
+  
+  a {
+    font-weight: 600;
+    color: #0073e6;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.mascotcontainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  
+  img {
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+
+
+
+
