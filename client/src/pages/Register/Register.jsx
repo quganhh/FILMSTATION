@@ -49,13 +49,33 @@ function Register() {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Box sx={{ mt: 5 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+    <Container maxWidth="md" className={styles.container}>
+      <Box>
+        {/* Nút Back dạng icon */}
+        <IconButton
+          className={styles.backbutton}
+          onClick={handleBack}
+          sx={{
+            position: "absolute",
+            top: 16,
+            left: 16,
+            color: "primary.main",
+          }}
+        >
+          <ArrowBackIcon sx={{ fontSize: 40 }} />
+        </IconButton>
+      </Box>
+      <Box className={styles.box} sx={{ flex: 1, mr: 3, textAlign: "center" }}>
+        <Typography variant="h3" align="center" gutterBottom>
           {" "}
           Đăng ký
         </Typography>
-        <form onSubmit={handleSignUp}>
+
+        <form
+          onSubmit={handleSignUp}
+          className={styles.form}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
           <TextField
             fullWidth
             label="Tên tài khoản"

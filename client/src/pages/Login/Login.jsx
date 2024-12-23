@@ -40,7 +40,7 @@ function Login() {
           </IconButton>
         </Link>
       </Box>
-      <Box className="login-box">
+      <Box className={styles.loginbox}>
         <Typography
           variant="h4"
           component="h2"
