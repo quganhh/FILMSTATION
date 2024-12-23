@@ -6,12 +6,19 @@ import {
   Toolbar,
   InputBase,
   Box,
+  Menu,
+  MenuItem,
+  IconButton,
 } from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 import styles from "./styles/Header.module.scss";
 import Grid from "@mui/material/Grid";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -51,42 +58,100 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      alert("Lỗi khi đăng xuất: " + error.message);
+    }
+  };
+
   return (
     <AppBar position="static" className={styles.main} sx={{ bgcolor: "white" }}>
       <Toolbar>
-        <Grid container spacing={2} className={styles.firstGrid}>
-          <Grid xs={7} md={7} lg={7}>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Grid item xs={7} className={styles.firstGrid}>
             <Link to="/">
               <Button className={styles.button1}>Đặt vé xem phim</Button>
             </Link>
             <Link to="movies">
+
+              <Button className={styles.button2}>Lịch chiếu phim</Button>
+
               <Button className={styles.button2}>Lịch chiếu</Button>
             </Link>
             <Link to="movies">
               <Button className={styles.button2}>Phim</Button>
-
             </Link>
           </Grid>
-          <Grid xs={2} md={2} lg={2} className={styles.secondGrid}>
+          <Grid item xs={2} className={styles.secondGrid}>
             <Link to="/" style={{ textDecoration: "none" }}>
               <Typography variant="h6" className={styles.logo}>
-                Film Station
+                FS
               </Typography>
             </Link>
           </Grid>
-        </Grid>
-        <Grid xs={3} md={3} lg={3} className={styles.thirdGrid}>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon className={styles.searchIcon} />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              className={styles.searchBar}
-            />
-          </Search>
+          <Grid item xs={3} className={styles.thirdGrid}>
+            <Box display="flex" alignItems="center">
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon className={styles.searchIcon} />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  className={styles.searchBar}
+                />
+              </Search>
+
+              <Link to="login">
+                  <Button>Login</Button>
+              </Link>
+   
+                <IconButton
+                  size="large"
+                  edge="end"
+                  onClick={handleMenu}
+                  className={styles.profile}
+                >
+                  <AccountCircle />
+                </IconButton>
+              
+
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                keepMounted
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <Link to="profile">
+                  <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
+                </Link>
+                <MenuItem onClick={handleClose}>Quản lý tài khoản</MenuItem>
+                <MenuItem onClick={handleClose}>Lịch sử mua vé</MenuItem>
+                <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
+              </Menu>
+            </Box>
+          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>

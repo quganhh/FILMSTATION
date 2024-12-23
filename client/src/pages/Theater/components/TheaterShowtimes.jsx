@@ -3,7 +3,7 @@ import { Container, Typography, Box } from '@mui/material';
 import DateTabs from './DateTabs';
 import ShowTimeCard from './ShowTimeCard';
 import styles from "./styles/TheaterShowtimes.module.scss";
-import { Image } from '@mui/icons-material';
+
 
 const showtimes = [
   {

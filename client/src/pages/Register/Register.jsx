@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { TextField, Button, Container, Typography, Box, Link, IconButton  } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Register.module.scss";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -19,11 +23,13 @@ function Register() {
     password: "123456",
   };
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     // Kiểm tra dữ liệu nhập
     if (
@@ -42,6 +48,21 @@ function Register() {
 
   const handleBack = () => {
     window.history.back();
+
+    const { email, password, confirmPassword } = formData;
+
+    if (password !== confirmPassword) {
+      alert("Mật khẩu và xác nhận mật khẩu không khớp!");
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Đăng ký thành công!");
+      navigate("/login"); 
+    } catch (error) {
+      alert("Đăng ký thất bại: " + error.message);
+    }
   };
 
   return (
@@ -74,6 +95,7 @@ function Register() {
           className={styles.form}
           style={{ display: "flex", flexDirection: "column" }}
         >
+        <form onSubmit={handleSignUp}>
           <TextField
             fullWidth
             label="Tên tài khoản"
@@ -134,6 +156,8 @@ function Register() {
           <Link href="/Login" underline="hover">
             Đăng nhập!
           </Link>
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+          Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
         </Typography>
       </Box>
 
