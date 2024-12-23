@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+  
+
+    
+    .box {
+      flex: 1;
+      margin-right: 30px;
+  
+      h3 {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+  
+      .form {
+        
+        
+  
+        .MuiTextField-root {
+          margin-bottom: 15px;
+  
+          .MuiInputBase-input {
+            font-size: 1rem;
+            padding: 10px;
+          }
+        }
+  
+        .registerbtb {
+          margin-top: 20px;
+          background-color: #e74c3c;
+          color: rgb(244, 240, 240);
+          font-weight: bold;
+          font-size: 1rem;
+          padding: 10px 0;
+          transition: background-color 0.3s, transform 0.2s;
+  
+          &:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  
+    .mascotcontainer {
+      flex: 1;
+      text-align: center;
+  
+      img {
+        max-width: 100%;
+        height: auto;
+        animation: float 2s infinite ease-in-out;
+      }
+    }
+  }
+  
+  // Hiệu ứng "float" cho ảnh mascot
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+
+  

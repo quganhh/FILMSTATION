@@ -1,5 +1,7 @@
-// RegisterForm.js
 import React, { useState } from "react";
+import { TextField, Button, Container, Typography, Box, Link, IconButton  } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import styles from "./Register.module.scss";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -12,6 +14,14 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Thông tin được set cứng
+  const hardcodedData = {
+    username: "legiangson",
+    email: "legiangson@example.com",
+    password: "123456",
+  };
 
   const navigate = useNavigate();
 
@@ -21,6 +31,23 @@ function Register() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    // Kiểm tra dữ liệu nhập
+    if (
+      formData.username === hardcodedData.username &&
+      formData.email === hardcodedData.email &&
+      formData.password === hardcodedData.password &&
+      formData.password === formData.confirmPassword
+    ) {
+      // Chuyển hướng nếu thông tin hợp lệ
+      window.location.href = "/welcome"; // Thay bằng đường dẫn khác
+    } else {
+      // Hiển thị lỗi nếu không khớp
+      setErrorMessage("Thông tin không hợp lệ hoặc mật khẩu xác nhận không khớp.");
+    }
+  };
+
+  const handleBack = () => {
+    window.history.back();
 
     const { email, password, confirmPassword } = formData;
 
@@ -39,11 +66,35 @@ function Register() {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Box sx={{ mt: 5 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+    <Container maxWidth="md" className={styles.container}>
+      <Box>
+        {/* Nút Back dạng icon */}
+        <IconButton
+          className={styles.backbutton}
+          onClick={handleBack}
+          sx={{
+            position: "absolute",
+            top: 16,
+            left: 16,
+            color: "primary.main",
+          }}
+        >
+          <ArrowBackIcon sx={{ fontSize: 40 }} />
+        </IconButton>
+      </Box>
+      
+      <Box        
+        className={styles.box}
+        sx={{ flex: 1, mr: 3, textAlign: "center" }}
+      >
+        <Typography variant="h3" align="center" gutterBottom>
           Đăng ký
         </Typography>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.form}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
         <form onSubmit={handleSignUp}>
           <TextField
             fullWidth
@@ -84,7 +135,13 @@ function Register() {
             margin="normal"
             required
           />
+          {errorMessage && (
+            <Typography color="error" sx={{ mt: 2 }}>
+              {errorMessage}
+            </Typography>
+          )}
           <Button
+            className={styles.registerbtn}
             type="submit"
             variant="contained"
             color="primary"
@@ -94,10 +151,19 @@ function Register() {
             Đăng ký
           </Button>
         </form>
+        <Typography variant="body2" className={styles.registerlink}>
+          Đã có tài khoản?{' '}
+          <Link href="/Login" underline="hover">
+            Đăng nhập!
+          </Link>
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
           Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
         </Typography>
       </Box>
+
+      <div className={styles.mascotcontainer}>
+        <img src="mascot.png" alt="Mascot" />
+      </div>
     </Container>
   );
 }
