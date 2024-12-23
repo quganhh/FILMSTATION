@@ -87,28 +87,25 @@ function Header() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Grid item xs={7} className={styles.firstGrid}>
+          <Grid item xs={7} md={4} className={styles.firstGrid}>
             <Link to="/">
               <Button className={styles.button1}>Đặt vé xem phim</Button>
             </Link>
             <Link to="movies">
-
-              <Button className={styles.button2}>Lịch chiếu phim</Button>
-
               <Button className={styles.button2}>Lịch chiếu</Button>
             </Link>
             <Link to="movies">
               <Button className={styles.button2}>Phim</Button>
             </Link>
           </Grid>
-          <Grid item xs={2} className={styles.secondGrid}>
+          <Grid item xs={2} md={4} className={styles.secondGrid}>
             <Link to="/" style={{ textDecoration: "none" }}>
               <Typography variant="h6" className={styles.logo}>
-                FS
+                FILMSTATION
               </Typography>
             </Link>
           </Grid>
-          <Grid item xs={3} className={styles.thirdGrid}>
+          <Grid item xs={3} md={4} className={styles.thirdGrid}>
             <Box display="flex" alignItems="center">
               <Search>
                 <SearchIconWrapper>
@@ -122,18 +119,17 @@ function Header() {
               </Search>
 
               <Link to="login">
-                  <Button>Login</Button>
+                <Button>Login</Button>
               </Link>
-   
-                <IconButton
-                  size="large"
-                  edge="end"
-                  onClick={handleMenu}
-                  className={styles.profile}
-                >
-                  <AccountCircle />
-                </IconButton>
-              
+
+              <IconButton
+                size="large"
+                edge="end"
+                onClick={handleMenu}
+                className={styles.profile}
+              >
+                <AccountCircle />
+              </IconButton>
 
               <Menu
                 anchorEl={anchorEl}
@@ -143,7 +139,7 @@ function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link to="profile">
+                <Link to="/profile">
                   <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
                 </Link>
                 <MenuItem onClick={handleClose}>Quản lý tài khoản</MenuItem>
