@@ -1,64 +1,46 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import styles from "./styles/MovieList.module.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const movies = [
-  {
-    title: "Công Tử Bạc Liêu",
-    date: "06/12",
-    rating: "68%",
-    img: "congtubaclieu.jpg",
-  },
-  {
-    title: "Linh Miêu: Q...",
-    date: "22/11",
-    rating: "73%",
-    img: "linhmieu.jpg",
-  },
-  {
-    title: "Hành Trình C...",
-    date: "04/12",
-    rating: "100%",
-    img: "hanhtrinhcuamoana2.jpg",
-  },
-  {
-    title: "Ngải Quỷ",
-    date: "13/12",
-    rating: "68%",
-    img: "ngaiquy.jpg",
-  },
-  {
-    title: "Gia Đình Hoà...",
-    date: "13/12",
-    rating: "68%",
-    img: "giadinhhoanhao.jpg",
-  },
-  {
-    title: "Tết Âm Hồn",
-    date: "06/12",
-    rating: "68%",
-    img: "tetamhon.jpg",
-  },
-  {
-    title: "Mèo Ma Bé...",
-    date: "06/12",
-    rating: "68%",
-    img: "meomabetha.jpg",
-  },
-  {
-    title: "Chiến Địa Từ...",
-    date: "29/11",
-    rating: "30%",
-    img: "chiendiatuthi.jpeg",
-  },
-];
+const TMDB_API_KEY = "bc1e436c524b5144e3ec840831e92aa8";
+const TMDB_API_URL = "https://api.themoviedb.org/3/movie/upcoming?language=vi-VN";
 
 function MovieCard() {
+  const [movies, setMovies] = useState([]);
   const scrollRef = useRef(null);
   let isDragging = false;
   let startX;
   let scrollLeft;
+
+  // Fetch movies from TMDB API
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(TMDB_API_URL, {
+          params: {
+            api_key: TMDB_API_KEY,
+          },
+        });
+        const fetchedMovies = response.data.results.map((movie) => ({
+          id: movie.id, 
+          title: movie.title || movie.original_title,
+          date: new Date(movie.release_date).toLocaleDateString("vi-VN", {
+            day: "2-digit",
+            month: "2-digit",
+          }),
+          rating: `${Math.round(movie.vote_average * 10)}%`,
+          img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        }));
+        setMovies(fetchedMovies);
+      } catch (error) {
+        console.error("Failed to fetch movies from TMDB:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   const handleMouseDown = (e) => {
     isDragging = true;
@@ -78,43 +60,46 @@ function MovieCard() {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust scrolling speed
+    const walk = (x - startX) * 2; 
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
     <Box className={styles.Container}>
-      <Link to="/detailmovie" style={{ textDecoration: "none" }}>
-        <Box
-          className="horizontal-scroll"
-          ref={scrollRef}
-          sx={{
-            display: "flex",
-            overflowX: "auto",
-            scrollSnapType: "x mandatory",
-            gap: 2,
-            paddingBottom: 1,
-            cursor: isDragging ? "grabbing" : "grab",
-            "::-webkit-scrollbar": { display: "none" },
-          }}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-        >
-          {movies.map((movie, index) => (
-            <Card
-              className={styles.moviecard}
-              key={index}
-              sx={{
-                minWidth: 180,
-                scrollSnapAlign: "start",
-                transition: "transform 0.3s, box-shadow 0.3s",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-                },
-              }}
+      <Box
+        className="horizontal-scroll"
+        ref={scrollRef}
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          gap: 2,
+          paddingBottom: 1,
+          cursor: isDragging ? "grabbing" : "grab",
+          "::-webkit-scrollbar": { display: "none" },
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
+        {movies.map((movie, index) => (
+          <Card
+            className={styles.moviecard}
+            key={index}
+            sx={{
+              minWidth: 180,
+              scrollSnapAlign: "start",
+              transition: "transform 0.3s, box-shadow 0.3s",
+              "&:hover": {
+                transform: "scale(1.05)",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+              },
+            }}
+          >
+            <Link
+              to={`/detailmovie/${movie.id}`} 
+              style={{ textDecoration: "none", color: "inherit" }}
             >
               <CardMedia
                 component="img"
@@ -137,11 +122,8 @@ function MovieCard() {
                   <Typography variant="body2" className={styles.moviedate}>
                     {movie.date}
                   </Typography>
-                  {movie.rating && (
-                    <Typography variant="body2" className={styles.movierating}>
-                      {movie.rating}
-                    </Typography>
-                  )}
+                  
+                 
                 </Box>
 
                 <Box
@@ -153,10 +135,10 @@ function MovieCard() {
                   Mua vé
                 </Box>
               </CardContent>
-            </Card>
-          ))}
-        </Box>
-      </Link>
+            </Link>
+          </Card>
+        ))}
+      </Box>
     </Box>
   );
 }

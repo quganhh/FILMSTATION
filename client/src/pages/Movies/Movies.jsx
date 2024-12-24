@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Card,
@@ -9,191 +9,164 @@ import {
   Menu,
   MenuItem,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import styles from "./Movies.module.scss";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const movies = [
-  {
-    title: "Công Tử Bạc Liêu",
-    date: "06/12",
-    rating: 64,
-    img: "congtubaclieu.jpg",
-  },
-  {
-    title: "Gia Đình Hoàn Hảo",
-    date: "13/12",
-    rating: 100,
-    img: "giadinhhoanhao.jpg",
-  },
-  { title: "Mèo Ma Bê Tha", date: "06/12", rating: 100, img: "meomabetha.jpg" },
-  { title: "TRAPEZIUM", date: "06/12", rating: 100, img: "trapezium.jpg" },
-  { title: "Wicked", date: "22/11", rating: 86, img: "wicked.jpg" },
-  {
-    title: "Chiến Địa Tử Thi",
-    date: "29/11",
-    rating: 30,
-    img: "chiendiatuthi.jpeg",
-  },
-  {
-    title: "Cu Li Không Bao...",
-    date: "15/11",
-    rating: 100,
-    img: "culikhongbaogiokhoc.jpg",
-  },
-  { title: "Blue Period", date: "29/11", rating: 10, img: "blueperiod.jpg" },
-  {
-    title: "Võ Sĩ Giác Đấu 2",
-    date: "15/11",
-    rating: 100,
-    img: "vosigiacdau2.jpg",
-  },
-  {
-    title: "Ngày Ta Đã Yêu",
-    date: "15/11",
-    rating: 100,
-    img: "ngaytadayeu.jpg",
-  },
-  {
-    title: "Đôi Bạn Học Yêu",
-    date: "08/11",
-    rating: 100,
-    img: "doibanhocyeu.jpg",
-  },
-  { title: "Thần Dược", date: "01/11", rating: 10, img: "thanduoc.jpg" },
-];
+const TMDB_API_KEY = "bc1e436c524b5144e3ec840831e92aa8";
 
 function Movies() {
-  const [anchorEl, setAnchorEl] = useState(null);
-
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [filter, setFilter] = useState("Tất cả");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/now_playing?language=vi-VN&page=1`,
+          {
+            params: {
+              api_key: TMDB_API_KEY,
+            },
+          }
+        );
+        setMovies(response.data.results);
+        setFilteredMovies(response.data.results);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+        setLoading(false);
+      }
+    };
+    fetchMovies();
+  }, []);
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuType = (value) => {
+  const handleFilterChange = (value) => {
     setAnchorEl(null);
-    if (value) setFilter(value);
+    setFilter(value);
+
+    if (value === "Tất cả") {
+      setFilteredMovies(movies);
+    } else {
+      const filtered = movies.filter((movie) =>
+        movie.genre_ids.includes(getGenreId(value))
+      );
+      setFilteredMovies(filtered);
+    }
   };
 
-  const handleMenuLanguage = (value) => {
-    setAnchorEl(null);
-    if (value) setFilter(value);
+  const getGenreId = (genreName) => {
+    const genres = {
+      "Hành động": 28,
+      "Phiêu lưu": 12,
+      "Hoạt hình": 16,
+      Hài: 35,
+      "Tội phạm": 80,
+      "Tài liệu": 99,
+      "Kinh dị": 27,
+      "Tâm lý": 18,
+      "Gia đình": 10751,
+      "Khoa học viễn tưởng": 878,
+    };
+    return genres[genreName] || null;
   };
 
   return (
     <Box className={styles.container}>
       <Header />
 
-      <CardMedia
-        className={styles.img}
-        component="img"
-        src="/moviesbanner.png"
-      />
-
-      <CardMedia
-        className={styles.img}
-        component="img"
-        src="/moviesbanner.png"
-      />
-
-      <Typography variant="h4" className={styles.pageTitle}>
-        Phim đang chiếu
-      </Typography>
-
-      <Typography variant="h4" className={styles.desTitle}>
-        Danh sách các phim hiện đang chiếu rạp trên toàn quốc 12/12/2024. Xem
-        lịch chiếu phim, giá vé tiện lợi, đặt vé nhanh chỉ với 1 bước! Danh sách
-        các phim hiện đang chiếu rạp trên toàn quốc 12/12/2024. Xem lịch chiếu
-        phim, giá vé tiện lợi, đặt vé nhanh chỉ với 1 bước!
-      </Typography>
-
-      {/* Dropdown Buttons */}
-      <Grid container spacing={3} className={styles.filterBTN}>
-        <Box>
-          <Button variant="contained" color="primary" onClick={handleMenuClick}>
-            {filter}
-          </Button>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={() => handleMenuType(null)}
-          >
-            <MenuItem onClick={() => handleMenuType("Thể loại")}>
-              Tất cả
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Kinh dị")}>
-              Kinh dị
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Tâm lý")}>Tâm lý</MenuItem>
-            <MenuItem onClick={() => handleMenuType("Hành động")}>
-              Hành động
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Gia đình")}>
-              Gia đình
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Hài")}>Hài</MenuItem>
-            <MenuItem onClick={() => handleMenuType("Tình cảm")}>
-              Tình cảm
-            </MenuItem>
-
-            <MenuItem onClick={() => handleMenuType("Thể loại")}>
-              Tất cả
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Kinh dị")}>
-              Kinh dị
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Tâm lý")}>Tâm lý</MenuItem>
-            <MenuItem onClick={() => handleMenuType("Hành động")}>
-              Hành động
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Gia đình")}>
-              Gia đình
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuType("Hài")}>Hài</MenuItem>
-            <MenuItem onClick={() => handleMenuType("Tình cảm")}>
-              Tình cảm
-            </MenuItem>
-          </Menu>
+      <CardMedia component="div" className={styles.banner}>
+        <img
+          src="/moviesbanner.png"
+          alt="Movies Banner"
+          style={{ width: "100%", height: "auto" }}
+        />
+        <Box className={styles.bannerOverlay}>
+          <Typography variant="h4" className={styles.pageTitle}>
+            Phim đang chiếu
+          </Typography>
+          <Typography variant="body1" className={styles.pageDescription}>
+            Danh sách các phim hiện đang chiếu rạp trên toàn quốc 12/12/2024.
+            Xem lịch chiếu phim, giá vé tiện lợi, đặt vé nhanh chỉ với 1 bước!
+          </Typography>
         </Box>
-      </Grid>
+      </CardMedia>
 
-      {/* Movies Grid */}
-      <Grid container spacing={2} className={styles.moviesGrid}>
-        {movies.map((movie, index) => (
-          <Grid item key={index}>
-            <Card className={styles.movieCard}>
-              <CardMedia component="img" alt={movie.title} image={movie.img} />
-              <CardContent>
-                <Typography variant="h6">{movie.title}</Typography>
+      {/* Filter Menu */}
+      <Box className={styles.filterContainer}>
+        <Button variant="contained" color="primary" onClick={handleMenuClick}>
+          {filter}
+        </Button>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={() => setAnchorEl(null)}
+        >
+          <MenuItem onClick={() => handleFilterChange("Tất cả")}>
+            Tất cả
+          </MenuItem>
+          <MenuItem onClick={() => handleFilterChange("Hành động")}>
+            Hành động
+          </MenuItem>
+          <MenuItem onClick={() => handleFilterChange("Kinh dị")}>
+            Kinh dị
+          </MenuItem>
+          <MenuItem onClick={() => handleFilterChange("Tâm lý")}>
+            Tâm lý
+          </MenuItem>
+          <MenuItem onClick={() => handleFilterChange("Hài")}>Hài</MenuItem>
+          <MenuItem onClick={() => handleFilterChange("Gia đình")}>
+            Gia đình
+          </MenuItem>
+        </Menu>
+      </Box>
 
-                <Box className={styles.info}>
-                  <Typography
-                    className={styles.date}
-                    variant="body2"
-                    color="textSecondary"
-                  >
-                    {movie.date}
-                  </Typography>
-                  {movie.rating !== null && (
+      {/* Movies List */}
+      {loading ? (
+        <Box className={styles.loadingContainer}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Grid container spacing={2} className={styles.moviesGrid}>
+          {filteredMovies.map((movie) => (
+            <Grid item xs={4} sm={3} md={2} key={movie.id}>
+              <Card className={styles.movieCard}>
+                <Link to={`/movie/${movie.id}`} className={styles.movieLink}>
+                  <CardMedia
+                    component="img"
+                    alt={movie.title}
+                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    className={styles.moviePoster}
+                  />
+                  <CardContent>
+                    <Typography variant="h6" className={styles.movieTitle}>
+                      {movie.title}
+                    </Typography>
                     <Typography
                       variant="body2"
-                      className={`${styles.rating} ${
-                        movie.rating >= 50 ? styles.positive : styles.negative
-                      }`}
+                      color="textSecondary"
+                      className={styles.movieDate}
                     >
-                      {movie.rating}%
+                      {new Date(movie.release_date).toLocaleDateString("vi-VN")}
                     </Typography>
-                  )}
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                  </CardContent>
+                </Link>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
       <Footer />
     </Box>
   );

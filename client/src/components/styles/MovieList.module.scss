@@ -1,73 +1,73 @@
 
 .Container{
-    width: 86em;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-left: 22px;
+  width: 86em;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-left: 22px;
 }
 .moviecard {
-    border-radius: 10px; 
-    overflow: hidden;
-    position: relative;
-    border: 1px solid #ddd; 
-    background: white; 
-  }
+  border-radius: 10px; 
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #ddd; 
+  background: white; 
+}
 
-  .moviecard img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+.moviecard img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-  .moviecard .buyticket {
-    position: absolute;
-    bottom: 96px;
-    left: 0;
-    right: 0;
-    background-color: #e50914; 
-    color: white; 
-    text-align: center;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 6px 0;
-    cursor: pointer;
-    text-transform: uppercase;
-  }
-  .moviecard .moviecontent {
-    padding: 8px 12px;
-    text-align: center; 
-  }
-  
-  .moviecard .movietitle {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .moviecard .moviedate
-  {
-    font-size: 16px;
-    color: #666; 
+.moviecard .buyticket {
+  position: absolute;
+  bottom: 96px;
+  left: 0;
+  right: 0;
+  background-color: #e50914; 
+  color: white; 
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 6px 0;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.moviecard .moviecontent {
+  padding: 8px 12px;
+  text-align: center; 
+}
 
-  }
+.moviecard .movietitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .moviecard .movierating {
-    font-size: 16px;
-    color: #00d97e; 
+.moviecard .moviedate
+{
+  font-size: 16px;
+  color: #666; 
+  margin-left: 3.5em;
+}
 
-  }
+.moviecard .movierating {
+  font-size: 16px;
+  color: #00d97e; 
+
+}
 
 
-  .moviecard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  .moviecontent .movieinfo {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-top: 15px; 
-  }
+.moviecard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.moviecontent .movieinfo {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 15px; 
+}
