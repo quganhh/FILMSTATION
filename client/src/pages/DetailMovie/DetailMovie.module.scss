@@ -1,0 +1,125 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+  
+    .card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+  
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
+  
+      .poster {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+  
+        @media (min-width: 768px) {
+          border-radius: 8px 0 0 8px;
+        }
+      }
+  
+      .content {
+        padding: 20px;
+  
+        .title {
+          font-size: 1.8rem;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 10px;
+        }
+  
+        .tagline {
+          font-size: 1rem;
+          color: #777;
+          margin-bottom: 20px;
+        }
+  
+        .rating {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+  
+          .stars {
+            margin-right: 10px;
+          }
+        }
+  
+        .releaseDate {
+          font-size: 1rem;
+          color: #444;
+          margin-bottom: 10px;
+  
+          strong {
+            color: #000;
+          }
+        }
+  
+        .overview {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #555;
+        }
+      }
+    }
+  
+    .castSection {
+      margin-top: 20px;
+  
+      .castTitle {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+  
+      .castCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+  
+        .castAvatar {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 10px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+  
+        .castName {
+          font-size: 0.9rem;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 5px;
+        }
+  
+        .castRole {
+          font-size: 0.8rem;
+          color: #777;
+        }
+      }
+    }
+  }
+  

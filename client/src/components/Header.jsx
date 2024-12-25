@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Typography,
@@ -49,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -60,7 +59,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Lắng nghe trạng thái đăng nhập
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(!!user); // Nếu có user thì logged in, ngược lại logged out
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,6 +81,7 @@ function Header() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      setAnchorEl(null);
     } catch (error) {
       alert("Lỗi khi đăng xuất: " + error.message);
     }
@@ -118,34 +127,42 @@ function Header() {
                 />
               </Search>
 
-              <Link to="login">
-                <Button>Login</Button>
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    onClick={handleMenu}
+                    className={styles.profile}
+                  >
+                    <AccountCircle />
+                  </IconButton>
 
-              <IconButton
-                size="large"
-                edge="end"
-                onClick={handleMenu}
-                className={styles.profile}
-              >
-                <AccountCircle />
-              </IconButton>
-
-              <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <Link to="/profile">
-                  <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
+                  <Menu
+                    anchorEl={anchorEl}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    keepMounted
+                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <Link to="/profile">
+                      <MenuItem onClick={handleClose}>Trang cá nhân</MenuItem>
+                    </Link>
+                    <MenuItem onClick={handleClose}>
+                      Quản lý tài khoản
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      Lịch sử mua vé
+                    </MenuItem>
+                    <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <Link to="login">
+                  <Button>Login</Button>
                 </Link>
-                <MenuItem onClick={handleClose}>Quản lý tài khoản</MenuItem>
-                <MenuItem onClick={handleClose}>Lịch sử mua vé</MenuItem>
-                <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
-              </Menu>
+              )}
             </Box>
           </Grid>
         </Grid>

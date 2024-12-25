@@ -10,7 +10,8 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Register.module.scss";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase"; // Import db từ firebase.js
+import { doc, setDoc } from "firebase/firestore"; // Import Firestore
 import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
@@ -29,14 +30,25 @@ function Register() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, password, confirmPassword } = formData;
+    const { username, email, password, confirmPassword } = formData;
 
     if (password !== confirmPassword) {
       alert("Mật khẩu và xác nhận mật khẩu không khớp!");
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      // Tạo tài khoản mới
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userId = userCredential.user.uid;
+
+      // Lưu thông tin người dùng và mật khẩu vào Firestore
+      await setDoc(doc(db, "users", userId), {
+        username: username,
+        email: email,
+        password: password, // Lưu mật khẩu (không an toàn, chỉ dùng cho học tập)
+        role: "user", // Mặc định vai trò là 'user'
+      });
+
       alert("Đăng ký thành công!");
       navigate("/login");
     } catch (error) {
@@ -67,7 +79,6 @@ function Register() {
       </Box>
       <Box className={styles.box} sx={{ flex: 1, mr: 3, textAlign: "center" }}>
         <Typography variant="h3" align="center" gutterBottom>
-          {" "}
           Đăng ký
         </Typography>
 

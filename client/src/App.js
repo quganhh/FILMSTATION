@@ -14,6 +14,7 @@ import Payment from "./pages/Payment/Payment";
 import SeatMain from "./pages/Payment/Seat/SeatMain";
 import OrderMain from "./pages/Payment/Order/OrderMain";
 import Profile from "./pages/Profile/Profile";
+import Admin from "./pages/Admin/Admin"
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/seat" element={<SeatMain />} />
           <Route path="/order" element={<OrderMain />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </Router>
