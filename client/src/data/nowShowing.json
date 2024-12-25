@@ -1,0 +1,26 @@
+{
+  "homePage": {
+    "moviesNowShowing": [
+      {
+        "id": "1",
+        "title": "Avengers: Endgame",
+        "image": "https://example.com/avengers-endgame.jpg"
+      },
+      {
+        "id": "2",
+        "title": "Spider-Man: No Way Home",
+        "image": "https://example.com/spiderman.jpg"
+      },
+      {
+        "id": "3",
+        "title": "Avatar: The Way of Water",
+        "image": "https://example.com/avatar2.jpg"
+      },
+      {
+        "id": "4",
+        "title": "Fast & Furious 9",
+        "image": "https://example.com/fast9.jpg"
+      }
+    ]
+  }
+}

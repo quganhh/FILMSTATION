@@ -1,0 +1,21 @@
+{
+  "comboSelection": {
+    "combos": [
+      {
+        "id": "combo1",
+        "name": "Combo 1 - Bắp lớn + Nước lớn",
+        "price": 60000
+      },
+      {
+        "id": "combo2",
+        "name": "Combo 2 - 2 Bắp nhỏ + 2 Nước nhỏ",
+        "price": 100000
+      },
+      {
+        "id": "combo3",
+        "name": "Combo 3 - Bắp caramel + Nước trái cây",
+        "price": 80000
+      }
+    ]
+  }
+}

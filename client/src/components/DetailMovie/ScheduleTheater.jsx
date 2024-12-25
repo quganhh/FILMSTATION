@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles/ScheduleTheater.module.scss";
-import {
-  Box,
-  Button,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-
 
 function ScheduleTheater() {
   const cinemaData = [
@@ -84,9 +77,6 @@ function ScheduleTheater() {
     { day: "23/12", label: "Th 2" },
   ];
 
-
-
-
   const [openCinemaIndex, setOpenCinemaIndex] = useState(null);
   const [openBranchIndex, setOpenBranchIndex] = useState(null);
   const [selectedCity, setSelectedCity] = useState("Tp. Hồ Chí Minh");
@@ -156,10 +146,6 @@ function ScheduleTheater() {
             onClick={() => toggleCinema(cinemaIndex)}
           >
             <img src={cinema.logo} alt="logo" className={styles.cinemaLogo} />
-            <Typography className={styles.cinemaTitle}>
-              {cinema.name}
-            </Typography>
-
             <Typography className={styles.cinemaTitle}>
               {cinema.name}
             </Typography>

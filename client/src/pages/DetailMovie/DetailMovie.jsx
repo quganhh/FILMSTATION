@@ -93,13 +93,22 @@ function DetailMovie() {
           />
         </Box>
         <CardContent sx={{ padding: "20px", flex: 1 }}>
-          <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "10px" }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+          >
             {movie.title}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" sx={{ marginBottom: "20px" }}>
+          <Typography
+            variant="subtitle1"
+            color="textSecondary"
+            sx={{ marginBottom: "20px" }}
+          >
             {movie.tagline}
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+          >
             <Rating
               value={movie.vote_average / 2}
               precision={0.5}
@@ -112,7 +121,9 @@ function DetailMovie() {
           </Box>
           <Typography variant="body1" sx={{ marginBottom: "10px" }}>
             Ngày phát hành:{" "}
-            <strong>{new Date(movie.release_date).toLocaleDateString("vi-VN")}</strong>
+            <strong>
+              {new Date(movie.release_date).toLocaleDateString("vi-VN")}
+            </strong>
           </Typography>
           <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
             {movie.overview}
