@@ -15,6 +15,8 @@ import SeatMain from "./pages/Payment/Seat/SeatMain";
 import OrderMain from "./pages/Payment/Order/OrderMain";
 import Profile from "./pages/Profile/Profile";
 import Admin from "./pages/Admin/Admin"
+import Search from './components/Search'
+import MovieList from "./components/MovieList";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           <Route path="/order" element={<OrderMain />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/" element={<MovieList />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
     </Router>

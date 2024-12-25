@@ -15,7 +15,7 @@ import styles from "./styles/Header.module.scss";
 import Grid from "@mui/material/Grid";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -61,11 +61,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Lắng nghe trạng thái đăng nhập
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsLoggedIn(!!user); // Nếu có user thì logged in, ngược lại logged out
+      setIsLoggedIn(!!user);
     });
     return () => unsubscribe();
   }, []);
@@ -84,6 +85,18 @@ function Header() {
       setAnchorEl(null);
     } catch (error) {
       alert("Lỗi khi đăng xuất: " + error.message);
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -124,6 +137,9 @@ function Header() {
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
                   className={styles.searchBar}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
               </Search>
 
