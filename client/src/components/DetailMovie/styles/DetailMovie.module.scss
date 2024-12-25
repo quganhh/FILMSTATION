@@ -40,7 +40,7 @@
 .typo2{
     position: absolute;
     color: #95aac9;
-    top: 15%;
+    top: 10%;
     left: 23%;
     font-size: 16px;
     font-weight: 300;
@@ -49,45 +49,21 @@
 
 .button{
     position: absolute;
-    display: flex;
     width: 35%;
-    top: 30%;
-    left: 308px;
+    top: 23%;
+    left: 130px;
     justify-content: space-around;  
 }
 
-.btnFavorite{
-    background-color: #fff;
-    border-color: #fff;
-
-
-}
-.btnAsess{
-    background-color: #fff;
-    border-color: #fff;
-
-}
-
-.btnTrailer{
-    background-color: #fff;
-    border-color: #fff;
-
-}
-
-.btnBuyTicket{
-    background-color: #fff;
-    border-color: #fff;
-
-}
 
 .typo3{
-    color: #283e59;
-    font-size: 13px;
+    color: #fff;
+    font-size: 15px;
 }
 
 .des1{
     position: absolute;
-    top: 48%;
+    top: 40%;
     left: 23%;
     width: 550px;
     text-align: justify;
@@ -114,7 +90,7 @@
 
 .des3{
     position: absolute;
-    top: 30%;
+    top: 2%;
     left: 65%;
     text-align: left;
     width: 390px;

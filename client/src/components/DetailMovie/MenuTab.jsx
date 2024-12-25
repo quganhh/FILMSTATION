@@ -19,10 +19,6 @@ function MenuTab() {
         variant="fullWidth"
         indicatorColor="primary"
         textColor="primary">
-            <Tab label="Thông tin phim" />
-            <Tab label="Lịch chiếu" />
-            <Tab label="Đánh giá" />
-            <Tab label="Tin tức" />
             <Tab label="Mua vé" />
         </Tabs>
         

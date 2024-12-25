@@ -1,14 +1,25 @@
-import React from 'react';
-import { Button, Typography, Box, CardMedia } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Typography, Box, CardMedia, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import styles from './styles/DetailMovie.module.scss'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 
-
-
 function Detail() {
-  return (
+    // State để kiểm soát mở/đóng dialog
+    const [open, setOpen] = useState(false);
+
+    // Mở dialog
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    // Đóng dialog
+    const handleClose = () => {
+        setOpen(false);
+    };
+  
+    return (
     <main className={styles.main}>
         <CardMedia className={styles.img} component="img" src="/VenomMoviebanner.jpg"/>
         <Box className={styles.container1}>
@@ -20,20 +31,30 @@ function Detail() {
             </Box>
 
             <Box className={styles.button}>
-                <Button className={styles.btnFavorite} variant="outlined" startIcon={<FavoriteBorderIcon />}>
-                    <Typography className={styles.typo3}>Thích</Typography>
-                </Button>
-                <Button className={styles.btnAsess} variant="outlined" startIcon={<StarBorderIcon />}>
-                    <Typography className={styles.typo3}>Đánh giá</Typography>
-                </Button>
-                <Button className={styles.btnTrailer} variant="outlined">
+                <Button className={styles.btnTrailer} variant="outlined" onClick={handleClickOpen}>
                     <Typography className={styles.typo3}>Trailer</Typography>
                 </Button>
-                <Button className={styles.btnBuyTicket} variant="outlined">
-                    <Typography className={styles.typo3}>Mua vé</Typography>
-                </Button>
             </Box>
-
+            {/* Modal hiển thị video YouTube */}
+            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+              <DialogTitle>Trailer</DialogTitle>
+              <DialogContent>
+                <iframe 
+                  width="100%" 
+                  height="400" 
+                  src="https://www.youtube.com/embed/HyIyd9joTTc" //video YouTube (link embed(nhúng))
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Đóng
+                </Button>
+              </DialogActions>
+            </Dialog>
             <Box className ={styles.des1}>
                 <Typography className={styles.typo4}>Tom Hardy sẽ tái xuất trong bom tấn Venom: The Last Dance (Venom: Kèo Cuối) và phải đối mặt với kẻ thù lớn nhất từ trước đến nay - toàn bộ chủng tộc Symbiote.</Typography>
             </Box>
