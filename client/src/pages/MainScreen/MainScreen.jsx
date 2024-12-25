@@ -4,13 +4,12 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import MovieList from "../../components/MovieList";
 import styles from "./MainScreen.module.scss";
-import UserStatus from "../Login/components/UserStatus";
+
 
 function MainScreen() {
   return (
     <main className="main-content">
       <Header />
-      <UserStatus/>
       <Box className={styles.main}>
         <Typography className={styles.typo1} variant="h5" gutterBottom>
           Đang chiếu

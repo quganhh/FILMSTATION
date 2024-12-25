@@ -4,20 +4,11 @@ import {
   Box,
   Button,
   MenuItem,
-  Collapse,
-  List,
-  ListItemIcon,
-  ListItem,
-  ListItemText,
-  Avatar,
-  Select,
-  FormControl,
   TextField,
   Typography,
 } from "@mui/material";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
+
 
 function ScheduleTheater() {
   const cinemaData = [
@@ -92,11 +83,9 @@ function ScheduleTheater() {
     { day: "22/12", label: "CN" },
     { day: "23/12", label: "Th 2" },
   ];
-  const [openIndex, setOpenIndex] = useState(null);
 
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+
+
 
   const [openCinemaIndex, setOpenCinemaIndex] = useState(null);
   const [openBranchIndex, setOpenBranchIndex] = useState(null);

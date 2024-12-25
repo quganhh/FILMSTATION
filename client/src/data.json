@@ -1,0 +1,95 @@
+
+{
+  "homePage": {
+    "moviesNowShowing": [
+      {
+        "id": "movie1",
+        "title": "Avengers: Endgame",
+        "image": "https://example.com/avengers-endgame.jpg"
+      },
+      {
+        "id": "movie2",
+        "title": "Spider-Man: No Way Home",
+        "image": "https://example.com/spiderman.jpg"
+      },
+      {
+        "id": "movie3",
+        "title": "Avatar: The Way of Water",
+        "image": "https://example.com/avatar2.jpg"
+      },
+      {
+        "id": "movie4",
+        "title": "Fast & Furious 9",
+        "image": "https://example.com/fast9.jpg"
+      }
+    ]
+  },
+  "cinemas": [
+    {
+      "id": "cinema1",
+      "name": "Galaxy Nguyễn Du",
+      "address": "116 Nguyễn Du, Quận 1, TP.HCM",
+      "movies": [
+        {
+          "id": "movie1",
+          "title": "Avengers: Endgame",
+          "image": "https://example.com/avengers-endgame.jpg",
+          "details": {
+            "description": "Các Avengers còn lại phải hợp tác để đảo ngược thiệt hại do Thanos gây ra.",
+            "duration": "180 phút",
+            "genres": ["Hành động", "Khoa học viễn tưởng"],
+            "rating": "PG-13"
+          },
+          "showtimes": [
+            "10:30 AM",
+            "1:30 PM",
+            "4:30 PM",
+            "7:30 PM"
+          ]
+        },
+        {
+          "id": "movie2",
+          "title": "Spider-Man: No Way Home",
+          "image": "https://example.com/spiderman.jpg",
+          "details": {
+            "description": "Spider-Man đối mặt với các kẻ thù từ đa vũ trụ.",
+            "duration": "148 phút",
+            "genres": ["Hành động", "Phiêu lưu"],
+            "rating": "PG-13"
+          },
+          "showtimes": [
+            "11:00 AM",
+            "2:00 PM",
+            "5:00 PM",
+            "8:00 PM"
+          ]
+        }
+      ]
+    }
+  ],
+  "seatSelection": {
+    "availableSeats": [
+      "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2"
+    ],
+    "reservedSeats": ["A4", "B4", "C4"]
+  },
+  "comboSelection": {
+    "combos": [
+      {
+        "id": "combo1",
+        "name": "Combo 1 - Bắp lớn + Nước lớn",
+        "price": 60000
+      },
+      {
+        "id": "combo2",
+        "name": "Combo 2 - 2 Bắp nhỏ + 2 Nước nhỏ",
+        "price": 100000
+      },
+      {
+        "id": "combo3",
+        "name": "Combo 3 - Bắp caramel + Nước trái cây",
+        "price": 80000
+      }
+    ]
+  }
+}

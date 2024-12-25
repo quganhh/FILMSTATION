@@ -4,7 +4,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,9 +16,28 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Đăng nhập thành công!");
-      navigate("/");
+      // Đăng nhập bằng email và mật khẩu
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userId = userCredential.user.uid; // Lấy userId từ Firebase Auth
+  
+      // Truy vấn vai trò từ Firestore
+      const userDoc = await getDoc(doc(db, "users", userId));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const role = userData.role; // Lấy vai trò từ Firestore
+  
+        if (role === "admin") {
+          alert("Đăng nhập thành công với vai trò Admin!");
+          navigate("/admin"); // Điều hướng tới trang Admin
+        } else if (role === "user") {
+          alert("Đăng nhập thành công với vai trò User!");
+          navigate("/"); // Điều hướng tới trang MainScreen
+        } else {
+          alert("Vai trò không hợp lệ!");
+        }
+      } else {
+        alert("Tài khoản không tồn tại trong hệ thống!");
+      }
     } catch (error) {
       alert("Đăng nhập thất bại: " + error.message);
     }
