@@ -83,9 +83,9 @@ function Movies() {
   };
 
   return (
-    <Box className={styles.container}>
-      <Header />
 
+    <Box className={styles.container}>
+      <Header/>
       <CardMedia component="div" className={styles.banner}>
         <img
           src="/moviesbanner.png"

@@ -145,7 +145,7 @@ function ScheduleTheater() {
             className={styles.cinemaHeader}
             onClick={() => toggleCinema(cinemaIndex)}
           >
-            <img src={cinema.logo} alt="logo" className={styles.cinemaLogo} />
+            <img src={`/${cinema.logo}`} alt="logo" className={styles.cinemaLogo} />
             <Typography className={styles.cinemaTitle}>
               {cinema.name}
             </Typography>
