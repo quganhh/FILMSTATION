@@ -6,6 +6,7 @@ import ListMovie from "./components/ListMovie";
 import CinemaList from "./components/CinemaList";
 import styles from "./Admin.module.scss";
 import User from "./components/User";
+import Schedule from './components/Schedule'
 function Admin() {
   const [selected, setSelected] = useState("movies");
   const renderPage = () => {
@@ -16,6 +17,8 @@ function Admin() {
         return <CinemaList />;
       case "user":
         return <User />;
+      case "schedule":
+        return <Schedule />;
       default:
         return <ListMovie />;
     }
