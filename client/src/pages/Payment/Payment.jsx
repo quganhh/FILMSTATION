@@ -11,11 +11,16 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import styles from "./Payment.module.scss";
+import emailjs from "@emailjs/browser";
 
 const paymentMethods = [
   { value: "momo", label: "Ví MoMo", image: "/momo.png" },
   { value: "qr", label: "Quét mã QR", image: "/QuetQR.png" },
-  { value: "bank", label: "Chuyển khoản / Internet Banking", image: "/bank.png" },
+  {
+    value: "bank",
+    label: "Chuyển khoản / Internet Banking",
+    image: "/bank.png",
+  },
   { value: "shopee", label: "Ví ShopeePay", image: "/shopeepay.png" },
   { value: "visa", label: "Thẻ Visa, Master, JCB", image: "/visa.png" },
   { value: "atm", label: "Thẻ ATM (Thẻ nội địa)", image: "/atm.png" },
@@ -23,17 +28,61 @@ const paymentMethods = [
   { value: "moveek", label: "Moveek Credits", image: "/moveek.png" },
 ];
 
-
 const formatCurrency = (value) => {
   return value.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
 };
 
 function Payment() {
   const location = useLocation();
-  const { selectedSeats, seatTotalPrice, combos, totalComboPrice } = location.state || {};
+  const { selectedSeats, seatTotalPrice, combos, totalComboPrice } =
+    location.state || {};
 
   const [timeLeft, setTimeLeft] = useState(300); // Thời gian giữ ghế: 300 giây (5 phút)
   const totalPrice = seatTotalPrice + totalComboPrice;
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+  });
+
+  const generateBookingId = () => {
+    return Math.floor(10000 + Math.random() * 90000); // Tạo mã số ngẫu nhiên 5 chữ số
+  };
+  const handlePayment = async () => {
+    const bookingId = generateBookingId();
+    const currentDate = new Date();
+    // Chuẩn bị template params cho email
+    const templateParams = {
+      to_name: formData.fullName,
+      to_email: formData.email,
+      booking_id: bookingId,
+      movie_name: "Nhím Sonic [NC18]", // Thay bằng tên phim từ state
+      date_time: `${currentDate.toLocaleDateString(
+        "vi-VN"
+      )} - ${currentDate.toLocaleTimeString("vi-VN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`,
+      seats: `${selectedSeats.length} IT - Adult VIP (${selectedSeats.join(
+        " "
+      )}) - ${formatCurrency(seatTotalPrice)}`,
+      food_drinks: combos
+        .filter((combo) => combo.quantity > 0)
+        .map((combo) => `${combo.name} x${combo.quantity}`)
+        .join("\n"),
+      cinema_room: "Mega Ly Chinh Thang - Screen 5", // Thay bằng thông tin rạp từ state
+      payment_method: "Chuyển khoản QR", // Thay bằng phương thức thanh toán đã chọn
+      total_amount: formatCurrency(totalPrice + 3000),
+    };
+
+    // Gửi email
+    const result = await emailjs.send(
+      "service_o1ko59c", // Service ID từ EmailJS
+      "template_82frj4n", // Template ID từ EmailJS
+      templateParams,
+      "2pCUgVhJ1r-NA-zbZ" // Public Key từ EmailJS
+    );
+  };
 
   // Đếm ngược thời gian giữ ghế
   useEffect(() => {
@@ -48,7 +97,9 @@ function Payment() {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
@@ -74,13 +125,17 @@ function Payment() {
               <Box key={combo.id} className={styles.tableRow}>
                 <Typography className="cell">{combo.name}</Typography>
                 <Typography className="cell">{combo.quantity}</Typography>
-                <Typography className="cell">{formatCurrency(combo.price * combo.quantity)}</Typography>
+                <Typography className="cell">
+                  {formatCurrency(combo.price * combo.quantity)}
+                </Typography>
               </Box>
             ))}
           <Box className={`${styles.tableRow} ${styles.totalRow}`}>
             <Typography className="cell"></Typography>
             <Typography className="cell">Tổng</Typography>
-            <Typography className="cell">{formatCurrency(totalPrice + 3000)}</Typography>
+            <Typography className="cell">
+              {formatCurrency(totalPrice + 3000)}
+            </Typography>
           </Box>
         </Box>
 
@@ -136,7 +191,9 @@ function Payment() {
 
       <Box className={styles.rightSection}>
         <Box className={styles.totalBox}>
-          <Typography className={styles.totalPrice}>{formatCurrency(totalPrice + 3000)}</Typography>
+          <Typography className={styles.totalPrice}>
+            {formatCurrency(totalPrice + 3000)}
+          </Typography>
           <Typography className={styles.timer}>
             Thời gian giữ ghế: {formatTime(timeLeft)}
           </Typography>
@@ -152,6 +209,7 @@ function Payment() {
           variant="contained"
           color="primary"
           className={styles.paymentButton}
+          onClick={handlePayment}
         >
           Thanh toán
         </Button>
