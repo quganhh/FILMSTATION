@@ -1,0 +1,71 @@
+/* ScheduleManagement.module.scss */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    .header {
+      margin-bottom: 20px;
+      text-align: center;
+  
+      h4 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  
+    .horizontal-layout {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+  
+      .section {
+        flex: 1;
+        max-width: 25%; /* Optional: Set width for each section */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 15px;
+  
+        .section-title {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: #555;
+        }
+  
+        .list {
+          max-height: 400px; /* Optional: Limit the height */
+          overflow-y: auto;
+  
+          .list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
+  
+            &:hover {
+              background-color: #ececec;
+            }
+  
+            &.selected {
+              background-color: #d1e7dd;
+            }
+  
+            &:not(:last-child) {
+              border-bottom: 1px solid #ddd;
+            }
+  
+            .item-text {
+              font-size: 16px;
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
+  

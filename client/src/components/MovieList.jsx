@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const TMDB_API_KEY = "bc1e436c524b5144e3ec840831e92aa8";
-const TMDB_API_URL = "https://api.themoviedb.org/3/movie/upcoming?language=vi-VN";
+const TMDB_API_URL =
+  "https://api.themoviedb.org/3/movie/upcoming?language=vi-VN";
 
 function MovieCard() {
   const [movies, setMovies] = useState([]);
@@ -24,7 +25,7 @@ function MovieCard() {
           },
         });
         const fetchedMovies = response.data.results.map((movie) => ({
-          id: movie.id, 
+          id: movie.id,
           title: movie.title || movie.original_title,
           date: new Date(movie.release_date).toLocaleDateString("vi-VN", {
             day: "2-digit",
@@ -60,7 +61,7 @@ function MovieCard() {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; 
+    const walk = (x - startX) * 2;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -98,7 +99,7 @@ function MovieCard() {
             }}
           >
             <Link
-              to={`/detailmovie/${movie.id}`} 
+              to={`/detailmovie/${movie.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <CardMedia
@@ -122,8 +123,6 @@ function MovieCard() {
                   <Typography variant="body2" className={styles.moviedate}>
                     {movie.date}
                   </Typography>
-                  
-                 
                 </Box>
 
                 <Box

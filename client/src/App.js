@@ -2,9 +2,6 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainScreen from "./pages/MainScreen/MainScreen";
-import Booking from "./pages/Booking/Booking";
-import News from "./pages/News/News";
-import Social from "./pages/Social/Social";
 import Theater from "./pages/Theater/Theater";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
@@ -14,8 +11,8 @@ import Payment from "./pages/Payment/Payment";
 import SeatMain from "./pages/Payment/Seat/SeatMain";
 import OrderMain from "./pages/Payment/Order/OrderMain";
 import Profile from "./pages/Profile/Profile";
-import Admin from "./pages/Admin/Admin"
-import Search from './components/Search'
+import Admin from "./pages/Admin/Admin";
+import Search from "./components/Search";
 import MovieList from "./components/MovieList";
 import TicketHistory from "./pages/HistoryTickets/HistoryTickets";
 
@@ -26,12 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<MainScreen />} />
           <Route path="/detailmovie/:id" element={<DetailMovie />} />
-          <Route path="/booking" element={<Booking />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movie/:id" element={<DetailMovie />} />
           <Route path="/theater" element={<Theater />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/social" element={<Social />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/payment" element={<Payment />} />
