@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import ListMovie from "./components/ListMovie";
 import CinemaList from "./components/CinemaList";
 import styles from "./Admin.module.scss";
+import User from "./components/User";
 function Admin() {
   const [selected, setSelected] = useState("movies");
   const renderPage = () => {
@@ -13,6 +14,8 @@ function Admin() {
         return <ListMovie />;
       case "cinema":
         return <CinemaList />;
+      case "user":
+        return <User />;
       default:
         return <ListMovie />;
     }

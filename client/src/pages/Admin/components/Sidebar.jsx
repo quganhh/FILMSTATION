@@ -61,7 +61,7 @@ function Sidebar({ setPage }) {
           <AttachMoneyIcon sx={{ mr: 2 }} />
           <ListItemText primary="Quản lý thanh toán" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton onClick={() => setPage("user")}>
           <Man4Icon sx={{ mr: 2 }} />
           <ListItemText primary="Quản lý người dùng" />
         </ListItemButton>
