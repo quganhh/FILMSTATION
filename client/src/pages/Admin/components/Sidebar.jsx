@@ -53,7 +53,7 @@ function Sidebar({ setPage }) {
 
       <Divider />
       <List>
-        <ListItemButton>
+        <ListItemButton onClick={() => setPage("schedule")}>
           <EventSeatIcon sx={{ mr: 2 }} />
           <ListItemText primary="Quản lý lịch chiếu phim" />
         </ListItemButton>
