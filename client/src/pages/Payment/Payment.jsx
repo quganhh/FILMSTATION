@@ -76,7 +76,7 @@ function Payment() {
     };
 
     // Gửi email
-    const result = await emailjs.send(
+    await emailjs.send(
       "service_o1ko59c", // Service ID từ EmailJS
       "template_82frj4n", // Template ID từ EmailJS
       templateParams,
