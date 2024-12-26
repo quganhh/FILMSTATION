@@ -1,125 +1,152 @@
 .container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-  
-    .card {
+  padding: 10px;
+  max-width: 1200px;
+  margin-top: 40px;
+  margin-left: 10%;
+  //background-color: #7c7878;
+  border-radius: 8px;
+  //box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  display: flex;
+  gap: 20px;
+  //background-color: #a6a8af;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+
+  .poster img {
+    display: block;
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .content {
+    text-align: left; 
+    flex: 1;
+
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1a81e7;
+      margin-left: 20px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #888888;
+      margin-bottom: 2px;
+      margin-left: 20px;
+    }
+
+    .rating {
       display: flex;
-      flex-direction: column;
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: #ffffff;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-      }
-  
-      .poster {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px 8px 0 0;
-  
-        @media (min-width: 768px) {
-          border-radius: 8px 0 0 8px;
-        }
-      }
-  
-      .content {
-        padding: 20px;
-  
-        .title {
-          font-size: 1.8rem;
-          font-weight: bold;
-          color: #333;
-          margin-bottom: 10px;
-        }
-  
-        .tagline {
-          font-size: 1rem;
-          color: #777;
-          margin-bottom: 20px;
-        }
-  
-        .rating {
-          display: flex;
-          align-items: center;
-          margin-bottom: 15px;
-  
-          .stars {
-            margin-right: 10px;
-          }
-        }
-  
-        .releaseDate {
-          font-size: 1rem;
-          color: #444;
-          margin-bottom: 10px;
-  
-          strong {
-            color: #000;
-          }
-        }
-  
-        .overview {
-          font-size: 1rem;
-          line-height: 1.6;
-          color: #555;
-        }
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+      margin-left: 20px;
+      margin-top: 35px;
+      .score {
+        font-size: 1rem;
+        color: #555555;
       }
     }
-  
-    .castSection {
-      margin-top: 20px;
-  
-      .castTitle {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-      }
-  
-      .castCard {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        background: #fff;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-        &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-        }
-  
-        .castAvatar {
-          width: 80px;
-          height: 80px;
-          margin-bottom: 10px;
-          border-radius: 50%;
-          object-fit: cover;
-          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        }
-  
-        .castName {
-          font-size: 0.9rem;
-          font-weight: bold;
-          color: #333;
-          margin-bottom: 5px;
-        }
-  
-        .castRole {
-          font-size: 0.8rem;
-          color: #777;
-        }
+
+    button {
+      margin-top: 10px;
+      margin-left: 20px;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 10px 20px;
+      text-transform: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e64a19;
       }
     }
   }
+}
+.castContainer {
+  margin-top: 20px;
+
+  .header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+
+  .actor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    //background-color: #ffffff;
+    //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-5px);
+      //box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .character {
+      font-size: 0.7rem;
+      color: #888888;
+    }
+  }
+}
+
+.dialog {
+  .MuiDialogTitle-root {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .MuiDialogContent-root iframe {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .MuiDialogActions-root button {
+    background-color: #ff5722;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e64a19;
+    }
+  }
+}
+
+
+
+
   

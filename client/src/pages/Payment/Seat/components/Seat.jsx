@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
+import ChairIcon from "@mui/icons-material/Chair"; 
 
 const Seat = ({ seat, onSelect }) => {
   const getColor = () => {
@@ -10,15 +11,16 @@ const Seat = ({ seat, onSelect }) => {
   };
 
   return (
-    <Button
-      variant="contained"
+    <IconButton
+      //variant="contained"
       color={getColor()}
       onClick={() => onSelect(seat)}
       disabled={seat.status === "sold"}
-      sx={{ width: 40, height: 40, margin: "5px" }}
+      sx={{ width: 45, height: 45, margin: "15px",  }}
     >
+      <ChairIcon fontSize="small" />
       {seat.label}
-    </Button>
+    </IconButton>
   );
 };
 

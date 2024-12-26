@@ -14,6 +14,7 @@ import Profile from "./pages/Profile/Profile";
 import Admin from "./pages/Admin/Admin";
 import Search from "./components/Search";
 import MovieList from "./components/MovieList";
+import TicketHistory from "./pages/HistoryTickets/HistoryTickets";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<MovieList />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/ticket" element={<TicketHistory />} />
         </Routes>
       </div>
     </Router>
