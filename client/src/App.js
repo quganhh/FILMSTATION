@@ -15,6 +15,7 @@ import Admin from "./pages/Admin/Admin";
 import Search from "./components/Search";
 import MovieList from "./components/MovieList";
 import TicketHistory from "./pages/HistoryTickets/HistoryTickets";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   return (
@@ -28,7 +29,14 @@ function App() {
           <Route path="/theater" element={<Theater />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/seat" element={<SeatMain />} />
           <Route path="/order" element={<OrderMain />} />
           <Route path="/profile" element={<Profile />} />

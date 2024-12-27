@@ -6,8 +6,6 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  TextField,
-  Checkbox,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -17,7 +15,6 @@ import Header from "../../components/Header";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./Payment.module.scss";
 import emailjs from "@emailjs/browser";
-
 const paymentMethods = [
   { value: "Momo", label: "Coming soon", image: "/momo.png" },
   {
@@ -97,6 +94,7 @@ function Payment() {
 
   // Đếm ngược thời gian giữ ghế
   useEffect(() => {
+    
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
     }, 1000);
