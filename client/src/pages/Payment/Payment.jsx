@@ -19,26 +19,15 @@ import styles from "./Payment.module.scss";
 import emailjs from "@emailjs/browser";
 
 const paymentMethods = [
-  { value: "momo", label: "Coming soon", image: "/momo.png" },
-  { value: "qr", label: "Coming soon", image: "/QuetQR.png" },
-  { value: "bank", label: "Chuyển khoản / Internet Banking", image: "/bank.png" },
-  { value: "shopee", label: "Coming soon", image: "/shopeepay.png" },
-  { value: "visa", label: "Coming soon", image: "/visa.png" },
-  { value: "atm", label: "Coming soon", image: "/atm.png" },
-  { value: "fpt", label: "Coming soon", image: "/fptpay.png" },
-  { value: "moveek", label: "Coming soon", image: "/moveek.png" },
-  { value: "momo", label: "Ví MoMo", image: "/momo.png" },
-  { value: "qr", label: "Quét mã QR", image: "/QuetQR.png" },
+  { value: "Momo", label: "Coming soon", image: "/momo.png" },
   {
     value: "bank",
     label: "Chuyển khoản / Internet Banking",
     image: "/bank.png",
   },
-  { value: "shopee", label: "Ví ShopeePay", image: "/shopeepay.png" },
-  { value: "visa", label: "Thẻ Visa, Master, JCB", image: "/visa.png" },
-  { value: "atm", label: "Thẻ ATM (Thẻ nội địa)", image: "/atm.png" },
-  { value: "fpt", label: "Ví FPT Pay", image: "/fptpay.png" },
-  { value: "moveek", label: "Moveek Credits", image: "/moveek.png" },
+  { value: "ShopeePay", label: "Coming soon", image: "/shopeepay.png" },
+  { value: "Visa", label: "Coming soon", image: "/visa.png" },
+  { value: "moveek", label: "Coming soon", image: "/moveek.png" },
 ];
 
 const formatCurrency = (value) => {
@@ -49,7 +38,9 @@ function Payment() {
   const location = useLocation();
   const { selectedSeats, seatTotalPrice, combos, totalComboPrice } =
     location.state || {};
-
+  const [openPopup, setOpenPopup] = useState(false); // Trạng thái popup
+  const [openSuccessPopup, setOpenSuccessPopup] = useState(false); // Trạng thái popup thành công
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("bank"); // Trạng thái phương thức thanh toán
   const [timeLeft, setTimeLeft] = useState(300); // Thời gian giữ ghế: 300 giây (5 phút)
   const totalPrice = seatTotalPrice + totalComboPrice;
   const [formData, setFormData] = useState({
@@ -61,7 +52,7 @@ function Payment() {
   const generateBookingId = () => {
     return Math.floor(10000 + Math.random() * 90000); // Tạo mã số ngẫu nhiên 5 chữ số
   };
-  const handlePayment = async () => {
+  const handleEmail = async () => {
     const bookingId = generateBookingId();
     const currentDate = new Date();
     // Chuẩn bị template params cho email
@@ -96,11 +87,13 @@ function Payment() {
       "2pCUgVhJ1r-NA-zbZ" // Public Key từ EmailJS
     );
   };
-
-  const [openPopup, setOpenPopup] = useState(false); // Trạng thái popup
-  const [openSuccessPopup, setOpenSuccessPopup] = useState(false); // Trạng thái popup thành công
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("bank"); // Trạng thái phương thức thanh toán
-
+  const handlePayment = () => {
+    if (selectedPaymentMethod === "bank") {
+      setOpenPopup(true); // Hiển thị popup nếu chọn phương thức là "bank"
+    } else {
+      alert("Chỉ hỗ trợ thanh toán qua Chuyển khoản / Internet Banking!");
+    }
+  };
 
   // Đếm ngược thời gian giữ ghế
   useEffect(() => {
@@ -120,30 +113,22 @@ function Payment() {
       .padStart(2, "0")}`;
   };
 
-  const handlePayment = () => {
-    if (selectedPaymentMethod === "bank") {
-      setOpenPopup(true); // Hiển thị popup nếu chọn phương thức là "bank"
-    } else {
-      alert("Chỉ hỗ trợ thanh toán qua Chuyển khoản / Internet Banking!");
-    }
-  };
-
   const handleClosePopup = () => {
     setOpenPopup(false); // Đóng popup
   };
   const handleConfirmPayment = () => {
     setOpenPopup(false); // Đóng popup đầu tiên
     setOpenSuccessPopup(true); // Mở popup thành công
+    handleEmail();
   };
-  
+
   const handleCloseSuccessPopup = () => {
     setOpenSuccessPopup(false); // Đóng popup thành công
   };
 
-
-  return (   
+  return (
     <Box>
-      <Header/>
+      <Header />
       <Box className={styles.paymentPage}>
         <Box className={styles.leftSection}>
           <Box className={styles.orderSummary}>
@@ -158,7 +143,9 @@ function Payment() {
               <Box key={index} className={styles.tableRow}>
                 <Typography className="cell">Ghế: {seat}</Typography>
                 <Typography className="cell">1</Typography>
-                <Typography className="cell">{formatCurrency(100000)}</Typography>
+                <Typography className="cell">
+                  {formatCurrency(100000)}
+                </Typography>
               </Box>
             ))}
             {combos
@@ -167,40 +154,30 @@ function Payment() {
                 <Box key={combo.id} className={styles.tableRow}>
                   <Typography className="cell">{combo.name}</Typography>
                   <Typography className="cell">{combo.quantity}</Typography>
-                  <Typography className="cell">{formatCurrency(combo.price * combo.quantity)}</Typography>
+                  <Typography className="cell">
+                    {formatCurrency(combo.price * combo.quantity)}
+                  </Typography>
                 </Box>
               ))}
+            <Box className={styles.tableRow}>
+              <Typography className="cell">Phí dịch vụ</Typography>
+              <Typography className="cell"></Typography>
+              <Typography className="cell">3.000</Typography>
+            </Box>
             <Box className={`${styles.tableRow} ${styles.totalRow}`}>
               <Typography className="cell"></Typography>
               <Typography className="cell">Tổng</Typography>
-              <Typography className="cell">{formatCurrency(totalPrice + 3000)}</Typography>
+              <Typography className="cell">
+                {formatCurrency(totalPrice + 3000)}
+              </Typography>
             </Box>
-          ))}
-          {combos
-            .filter((combo) => combo.quantity > 0)
-            .map((combo) => (
-              <Box key={combo.id} className={styles.tableRow}>
-                <Typography className="cell">{combo.name}</Typography>
-                <Typography className="cell">{combo.quantity}</Typography>
-                <Typography className="cell">
-                  {formatCurrency(combo.price * combo.quantity)}
-                </Typography>
-              </Box>
-            ))}
-          <Box className={`${styles.tableRow} ${styles.totalRow}`}>
-            <Typography className="cell"></Typography>
-            <Typography className="cell">Tổng</Typography>
-            <Typography className="cell">
-              {formatCurrency(totalPrice + 3000)}
-            </Typography>
           </Box>
-
           <Box className={styles.paymentMethods}>
             <Typography className={styles.paymentTitle}>
               Hình thức thanh toán
             </Typography>
-            <RadioGroup 
-              defaultValue="bank" 
+            <RadioGroup
+              defaultValue="bank"
               className={styles.methodList}
               value={selectedPaymentMethod}
               onChange={(e) => setSelectedPaymentMethod(e.target.value)}
@@ -224,25 +201,13 @@ function Payment() {
 
         <Box className={styles.rightSection}>
           <Box className={styles.totalBox}>
-            <Typography className={styles.totalPrice}>{formatCurrency(totalPrice + 3000)}</Typography>
+            <Typography className={styles.totalPrice}>
+              {formatCurrency(totalPrice + 3000)}
+            </Typography>
             <Typography className={styles.timer}>
               Thời gian giữ ghế: {formatTime(timeLeft)}
             </Typography>
           </Box>
-
-          <Typography className={styles.note}>
-            Mã vé sẽ được gửi qua số điện thoại và email
-
-      <Box className={styles.rightSection}>
-        <Box className={styles.totalBox}>
-          <Typography className={styles.totalPrice}>
-            {formatCurrency(totalPrice + 3000)}
-          </Typography>
-          <Typography className={styles.timer}>
-            Thời gian giữ ghế: {formatTime(timeLeft)}
-
-          </Typography>
-
           <Button
             variant="contained"
             color="primary"
@@ -258,14 +223,16 @@ function Payment() {
           <DialogTitle>Xác nhận thanh toán</DialogTitle>
           <DialogContent>
             {/* Thêm hình ảnh mã QR */}
-            <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}
+            >
               <img
                 src="/maqr.jpg"
                 alt="QR Code"
                 style={{ width: 350, height: 350 }}
               />
             </Box>
-            <Typography sx={{marginTop: 2 }}>
+            <Typography sx={{ marginTop: 2 }}>
               Ấn xác nhận sau khi đã thanh toán xong
             </Typography>
           </DialogContent>
@@ -288,8 +255,9 @@ function Payment() {
           <DialogContent>
             <Typography>
               Cảm ơn bạn đã sử dụng dịch vụ! Thanh toán của bạn đang được xử lý,
-              vui lòng chờ trong giây lát chúng tôi sẽ xác nhận giao dịch của bạn sớm nhất có thể.
-              Thông tin mã vé đã được gửi đến email và số điện thoại bạn cung cấp.
+              vui lòng chờ trong giây lát chúng tôi sẽ xác nhận giao dịch của
+              bạn sớm nhất có thể. Thông tin mã vé đã được gửi đến email và số
+              điện thoại bạn cung cấp.
             </Typography>
           </DialogContent>
           <DialogActions>
@@ -297,24 +265,9 @@ function Payment() {
               <Button onClick={handleCloseSuccessPopup} color="primary">
                 Đóng
               </Button>
-            </Link>  
+            </Link>
           </DialogActions>
         </Dialog>
-
-        <Typography className={styles.note}>
-          Vé đã mua không thể đổi hoặc hoàn tiền. Mã vé sẽ được gửi qua số điện
-          thoại và email đã nhập. Vui lòng kiểm tra lại thông tin trước khi tiếp
-          tục.
-        </Typography>
-
-        <Button
-          variant="contained"
-          color="primary"
-          className={styles.paymentButton}
-          onClick={handlePayment}
-        >
-          Thanh toán
-        </Button>
       </Box>
     </Box>
   );
